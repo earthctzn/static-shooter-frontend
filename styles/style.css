@@ -1,0 +1,19 @@
+#gameSpace {
+  
+  border: 1px solid black;
+
+  background-size: cover;
+  width: 800px;
+  height: 600px;
+  
+  box-sizing: border-box;
+  background-image: url("/Users/Caleb/Development/code/static-shooter-frontend/styles/resources/background/space.png");
+}
+
+/* .wraper {
+  width: 90%;
+}
+
+@media only screen and (min-width: 980px) {
+  .wraper { width:960px; }
+} */
