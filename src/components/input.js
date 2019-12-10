@@ -10,6 +10,16 @@ class inputHandler {
           ship.moveRight()
           break
       }
+      document.addEventListener('keyup', (e) => {
+        switch(e.keyCode) {
+          case 37:
+            ship.stop()
+            break
+          case 39:
+            ship.stop()
+            break
+        }
+      })
     })
   }
 

@@ -20,6 +20,11 @@ class Ship {
   moveRight() {
     this.speed = this.maxSpeed
   }
+
+  stop() {
+    this.speed = 0
+  }
+  
   draw(ctx) {
     // ctx.clearRect(0, 0, 800, 600)
     ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height)
