@@ -9,7 +9,7 @@ const GAME_HEIGHT = canvas.height;
 let newShip = new Ship(GAME_WIDTH, GAME_HEIGHT);
 
 newShip.draw(ctx);
-new inputHandler();
+new inputHandler(newShip);
 
 let lastTime = 0
 function loop(timestamp) {
