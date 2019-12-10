@@ -9,6 +9,7 @@ const GAME_HEIGHT = canvas.height;
 let newShip = new Ship(GAME_WIDTH, GAME_HEIGHT);
 
 newShip.draw(ctx);
+new inputHandler();
 
 let lastTime = 0
 function loop(timestamp) {
@@ -21,7 +22,7 @@ function loop(timestamp) {
 
   requestAnimationFrame(loop)
 }
-// loop()
+loop()
 // // ctx.fillStyle = '#f00'
 // ctx.drawImage(i, 130, 130, 20, 10)
 
