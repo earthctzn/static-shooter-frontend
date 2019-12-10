@@ -13,10 +13,10 @@ class inputHandler {
       document.addEventListener('keyup', (e) => {
         switch(e.keyCode) {
           case 37:
-            ship.stop()
+            if (ship.speed < 0 ) ship.stop()
             break
           case 39:
-            ship.stop()
+            if (ship.speed > 0 ) ship.stop()
             break
         }
       })
