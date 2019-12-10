@@ -1,15 +1,17 @@
 class Ship {
+  
   constructor(gameWidth, gameHeight) {
-    this.width = 100;
-    this.height = 90;
-    
+    this.img = document.getElementById('ship')
+    this.width = this.img.width
+    this.height = this.img.height
     this.position = {
-      x: gameWidth / 2 - this.width / 2,
-      y: gameHeight - this.height - 10
+      x: gameWidth/ 2 - this.width / 2,
+      y: gameHeight - this.height - 30
     }
   }
 
-  draw(ctxt) {
-    ctxt.fillRect(this.position.x, this.position.y, this.width, this.height)
+  draw(ctx) {
+    // ctx.clearRect(0, 0, 800, 600)
+    ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height)
   }
 } 

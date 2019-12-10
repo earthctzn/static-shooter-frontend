@@ -1,2 +1,2 @@
-const app = new App();
+// const game = new Game()
 

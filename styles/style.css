@@ -3,11 +3,8 @@
   border: 1px solid black;
 
   background-size: cover;
-  width: 800px;
-  height: 600px;
-  
   box-sizing: border-box;
-  background-image: url("/Users/Caleb/Development/code/static-shooter-frontend/styles/resources/background/space.png");
+  background-image: url("/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png");
 }
 
 /* .wraper {
@@ -17,3 +14,6 @@
 @media only screen and (min-width: 980px) {
   .wraper { width:960px; }
 } */
+.img {
+  display: none;
+}
