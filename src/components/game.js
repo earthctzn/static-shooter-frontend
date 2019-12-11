@@ -1,48 +1,52 @@
+class Game {
+  constructor() { 
+    this.adapter = new GameAdapter()
+    this.bullets =  []
+    this.galaxians = []
+    this.bindingsAndListeners()
+    this.startAtack()
+    this.createGalaxians()
+    this.createShip()
+    
+  }
+  bindingsAndListeners() {
+    this.canvas = document.querySelector('#gameSpace');
+    this.ctx = this.canvas.getContext('2d')
+    this.gameWidth = this.canvas.width;
+    this.gameHeight = this.canvas.height;
+    this.lastTime = 0
+    this.newShip = new Ship(this.gameWidth, this.gameHeight)
+  }
+  startAtack() {
 
-const canvas = document.getElementById("gameSpace");
-const ctx = canvas.getContext('2d')
-const GAME_WIDTH = canvas.width;
-const GAME_HEIGHT = canvas.height;
-// const i = document.getElementById('ship')
-// let space = new Space(GAME_WIDTH, GAME_HEIGHT)
+  }
+  createGalaxians() {
+    //I need to be able to add a number of galaxians of all types with both images for each.
+    this.galaxians.push(new Galaxian(this.gameWidth, this.gameHeight))
+    for (let g of this.galaxians)
+    g.draw(this.ctx)
+  }
+  createShip() {
+    
+    new inputHandler(this.newShip);
+    this.newShip.draw(this.ctx);
+  }
 
+  
 
-let galaxian = new Galaxian(GAME_WIDTH, GAME_HEIGHT)
-let newShip = new Ship(GAME_WIDTH, GAME_HEIGHT);
+  // gameLoop(timestamp) {
+  //   let deltaTime = timestamp - this.lastTime
+  //   this.lastTime = timestamp
 
-newShip.draw(ctx);
-new inputHandler(newShip);
-
-let lastTime = 0
-
-
-function loop(timestamp) {
-  let deltaTime = timestamp - lastTime
-  lastTime = timestamp
-
-  ctx.clearRect(0,0, 800, 600);
-  newShip.update(deltaTime);
-  newShip.draw(ctx)
-  galaxian.draw(ctx)
-  requestAnimationFrame(loop)
+  //   ctx.clearRect(0,0, 800, 600);
+  //   newShip.update(deltaTime);
+  //   newShip.draw(ctx)
+  //   galaxian.draw(ctx)
+  //   requestAnimationFrame(loop)
+  // }
+  // loop()
 }
-loop()
 
 
-// class Game {
-//   constructor() { 
-//     this.adapter = new GameAdapter()
-  
-//   }
-
-
-
-  
-
-
-
-
-
-// }
 
 
