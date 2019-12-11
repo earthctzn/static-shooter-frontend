@@ -4,17 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <link rel="stylesheet" type='text/css' href="styles/style.css">
   <title>Static Shooter</title>
 </head>
 
 <body class="wrapper">
-
   <canvas id='gameSpace' width="800" height="600"></canvas>
-   
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      let move =  0
+      setInterval(function(){
+        move += 1
+        $('canvas').css('background-position-y', move + 'px')
+      }, 10)
+    })
+  </script>
 
 
-  <img class="img" id="space" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
+  <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
   <img class="img" id="ship" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/ship.png">
   <img class="img" id="baddie1-a" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-A.png">
   <img class="img" id="baddie1-b" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-B.png">
@@ -30,8 +40,7 @@
 
 
 
-
-
+  <script src="src/components/galaxian.js"></script>
   <script src="src/components/input.js"></script>
   <script src="src/components/ship.js"></script>
   <script src="src/components/scores.js"></script>

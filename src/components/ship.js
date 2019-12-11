@@ -6,7 +6,7 @@ class Ship {
     this.gameWidth = gameWidth
     this.width = this.img.width
     this.height = this.img.height
-    this.maxSpeed = 7
+    this.maxSpeed = 6
     this.speed = 0
     this.position = {
       x: gameWidth/ 2 - this.width / 2,
@@ -24,7 +24,7 @@ class Ship {
   stop() {
     this.speed = 0
   }
-  
+
   draw(ctx) {
     // ctx.clearRect(0, 0, 800, 600)
     ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height)
@@ -38,8 +38,4 @@ class Ship {
       this.position.x = this.gameWidth - this.width
   }
 
-
-  // shoot(ctx) {
-  //   ctx.drawImage(this.missile)
-  // }
 } 
