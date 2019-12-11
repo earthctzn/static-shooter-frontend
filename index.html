@@ -12,6 +12,10 @@
 <body class="wrapper">
   <canvas id='gameSpace' width="800" height="600"></canvas>
   
+
+
+  <!-- Background -->
+  <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript">
     $(function(){
@@ -22,25 +26,30 @@
       }, 10)
     })
   </script>
-
-
-  <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
+  
+  <!-- Good guy -->
   <img class="img" id="ship" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/ship.png">
+  
+  <!-- Badguys -->
   <img class="img" id="baddie1-a" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-A.png">
   <img class="img" id="baddie1-b" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-B.png">
   <img class="img" id="baddie2-a" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-A.png">
   <img class="img" id="baddie2-b" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-B.png">
+  
+  <!-- Explosioin images -->
   <img class="img" id="baddieDie-1" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-1.png">
   <img class="img" id="baddieDie-2" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-2.png">
   <img class="img" id="baddieDie-3" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-3.png">
   <img class="img" id="baddieDie-4" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-4.png">
   <img class="img" id="baddieDie-5" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-5.png">
+  
+  <!-- Projectiles -->
   <img class="img" id="badMissile" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/badMissile.png">
   <img class="img" id="goodMissile" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/goodMissile.png">
 
-
-
   <script src="src/components/galaxian.js"></script>
+  <script src="src/components/galaxian1.js"></script>
+  <script src="src/components/galaxian2.js"></script>
   <script src="src/components/input.js"></script>
   <script src="src/components/ship.js"></script>
   <script src="src/components/scores.js"></script>
