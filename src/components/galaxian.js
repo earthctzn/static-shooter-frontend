@@ -52,9 +52,9 @@ class Galaxian {
    
     
 // }
-  flapWings() {
+  // flapWings() {
 
-  }
+  // }
  
   draw(ctx) {
     ctx.drawImage( this.img1, this.position.x, this.position.y, this.width, this.height)

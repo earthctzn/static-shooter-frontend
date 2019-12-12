@@ -20,13 +20,6 @@ class InputHandler {
             break
         }
       })
-      document.addEventListener('keydown', (e) => {
-        switch(e.keyCode) {
-          case 32:
-            ship.fire()
-            break
-        }
-      })
     })
   }
 

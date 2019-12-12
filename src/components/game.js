@@ -6,6 +6,7 @@ class Game {
     this.galaxians = []
     this.bindingsAndListeners()
     this.createGalaxians()
+    this.addGalaxians()
     this.createShip()
     this.gameLoop()
   }
@@ -17,53 +18,42 @@ class Game {
     this.gameHeight = this.canvas.height;
     this.lastTime = 0
     this.deltaTime = 0
+    this.listener = document.addEventListener('keydown', (e) => {
+      switch(e.keyCode) {
+        case 32:
+            this.addBullets()
+            this.goodBullet.draw(this.ctx)
+          break
+      }
+    })
+  }
+
+  addBullets() {
+    console.log(this.ship.location)
+    this.goodBullet = new GoodBullet(this.ship.location)
+    this.bullets.push(this.goodBullet)
+    // for (let b of this.bullets) {
+    //   console.log(b)
+    //   b.startingLoc = this.ship.location
+    // }
+    
+    
+  }
+
+
+  addGalaxians() {
     this.galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight)
     this.galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight)
     this.galaxians.push(this.galaxian1, this.galaxian2)
-    console.log(this.galaxians)
     for (let g of this.galaxians) {
-      g.getShipLoc = this.startAtack.bind(this)
-      g.atkPatern = this.setFlightPattern.bind(this)
+      g.getShipLoc = this.locateShip.bind(this)
+      // g.atkPatern = this.setFlightPattern.bind(this)
     }
-    this.ship = new Ship(this.gameWidth, this.gameHeight)
-    new InputHandler(this.ship)
   }
-  startAtack() {
-    return this.ship.location
-  }
-  setFlightPattern(){
-    setTimeout(() =>{
 
-        this.velocity = {
-            x: 1000, y: 10
-        }
-        setTimeout(() => {
-            this.velocity = {
-                x: 0, y: 90
-            }
-            setTimeout(() => {
-                this.velocity = {
-                    x: -100, y: -100
-                }
-                setTimeout(() => {
-                    this.velocity = {
-                        x: 100, y: -100
-                    }
-                    setTimeout(() => {
-                        this.velocity = {
-                            x: 100, y: 100
-                        }
-                        setTimeout(() => {
-                            this.velocity = {
-                                x: -100, y: 100
-                            }
-                            this.setFlightPattern()
-                        }, 200)
-                    }, 200)
-                }, 200)
-            }, 200)
-        }, 1000)
-    }, 1000)
+
+  locateShip() {
+    return this.ship.location
   }
 
 
@@ -72,7 +62,10 @@ class Game {
     for (let g of this.galaxians)
     g.draw(this.ctx)
   }
+
   createShip() {
+    this.ship = new Ship(this.gameWidth, this.gameHeight)
+    new InputHandler(this.ship)
     this.ship.draw(this.ctx);
   }
 
@@ -81,7 +74,12 @@ class Game {
     this.lastTime = timestamp
 
     this.ctx.clearRect(0,0, this.gameWidth, this.gameHeight);
-
+    for (let b of this.bullets) {
+      b.update(this.deltaTime)
+      b.draw(this.ctx)
+      // console.log(b.location)
+    }
+    
     this.ship.update(this.deltaTime);
     this.ship.draw(this.ctx)
     this.createGalaxians()

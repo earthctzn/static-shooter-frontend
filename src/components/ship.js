@@ -8,7 +8,8 @@ class Ship {
     this.height = this.img.height
     this.maxSpeed = 6
     this.speed = 0
-    this.position = {
+    this.goodBullets = []
+    this.location = {
       x: gameWidth/ 2 - this.width / 2,
       y: gameHeight - this.height - 30
     }
@@ -27,15 +28,15 @@ class Ship {
 
   draw(ctx) {
     // ctx.clearRect(0, 0, 800, 600)
-    ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height)
+    ctx.drawImage(this.img, this.location.x, this.location.y, this.width, this.height)
   }
 
   update(deltaTime) {
     if (!deltaTime) return;
-    this.position.x += this.speed
-    if (this.position.x < 0) this.position.x = 0
-    if (this.position.x + this.width > this.gameWidth)
-      this.position.x = this.gameWidth - this.width
+    this.location.x += this.speed
+    if (this.location.x < 0) this.location.x = 0
+    if (this.location.x + this.width > this.gameWidth)
+      this.location.x = this.gameWidth - this.width
   }
 
 } 
