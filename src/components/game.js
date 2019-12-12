@@ -1,10 +1,10 @@
 class Game {
   constructor() { 
     // this.adapter = new GameAdapter()
+    
     this.bullets =  []
     this.galaxians = []
     this.bindingsAndListeners()
-    // this.startAtack()
     this.createGalaxians()
     this.createShip()
     this.gameLoop()
@@ -23,6 +23,7 @@ class Game {
     console.log(this.galaxians)
     for (let g of this.galaxians) {
       g.getShipLoc = this.startAtack.bind(this)
+      g.atkPatern = this.setFlightPattern.bind(this)
     }
     this.ship = new Ship(this.gameWidth, this.gameHeight)
     new InputHandler(this.ship)
@@ -30,11 +31,44 @@ class Game {
   startAtack() {
     return this.ship.location
   }
+  setFlightPattern(){
+    setTimeout(() =>{
+
+        this.velocity = {
+            x: 1000, y: 10
+        }
+        setTimeout(() => {
+            this.velocity = {
+                x: 0, y: 90
+            }
+            setTimeout(() => {
+                this.velocity = {
+                    x: -100, y: -100
+                }
+                setTimeout(() => {
+                    this.velocity = {
+                        x: 100, y: -100
+                    }
+                    setTimeout(() => {
+                        this.velocity = {
+                            x: 100, y: 100
+                        }
+                        setTimeout(() => {
+                            this.velocity = {
+                                x: -100, y: 100
+                            }
+                            this.setFlightPattern()
+                        }, 200)
+                    }, 200)
+                }, 200)
+            }, 200)
+        }, 1000)
+    }, 1000)
+  }
+
+
   createGalaxians() {
     //I need to be able to add a number of galaxians of all types with both images for each.
-
-    // this.galaxian1.draw(this.ctx)
-    // this.galaxian2.draw(this.ctx)
     for (let g of this.galaxians)
     g.draw(this.ctx)
   }

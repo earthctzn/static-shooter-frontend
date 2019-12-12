@@ -1,7 +1,7 @@
 class InputHandler {
   constructor(ship) {
     document.addEventListener('keydown', (e) =>  {
-      
+
       switch(e.keyCode) {
         case 37:
           ship.moveLeft()
@@ -17,6 +17,13 @@ class InputHandler {
             break
           case 39:
             if (ship.speed > 0 ) ship.stop()
+            break
+        }
+      })
+      document.addEventListener('keydown', (e) => {
+        switch(e.keyCode) {
+          case 32:
+            ship.fire()
             break
         }
       })

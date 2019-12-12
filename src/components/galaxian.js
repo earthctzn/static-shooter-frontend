@@ -4,6 +4,10 @@ class Galaxian {
     this.gameWidth = gameWidth
     // this.width = this.img1.width
     // this.height = this.img1.height
+    this.velocity = {
+      x: 10,
+      y: 10
+    }
     this.maxSpeed = 7
     this.speed = 0
     // this.position = {
@@ -11,20 +15,47 @@ class Galaxian {
     //   y: gameHeight - this.height - 30
     // }
   }
-  // flapWings() {
-  //   const enemy2 = document.getElementById('baddie2-a').src
-  //   const enemy1 = document.getElementById('baddie1-a').src
-  //   if (enemy1 == '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-A.png') {
-  //       document.getElementById('baddie1-a').src = '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-A.png'
-  //   } else {
-  //       document.getElementById('baddie1-a').src = '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie1-B.png'
-  //   }
-  //   if (enemy2 == '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-A.png') {
-  //     document.getElementById('baddie2-a').src = '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-A.png'
-  //   } else {
-  //     document.getElementById('baddie2-a').src = '/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-B.png'
-  //   }
-  // }
+//   setFlightPattern(){
+//     setTimeout(() =>{
+
+//         this.velocity = {
+//             x: 1000, y: 10
+//         }
+//         setTimeout(() => {
+//             this.velocity = {
+//                 x: 0, y: 90
+//             }
+//             setTimeout(() => {
+//                 this.velocity = {
+//                     x: -100, y: -100
+//                 }
+//                 setTimeout(() => {
+//                     this.velocity = {
+//                         x: 100, y: -100
+//                     }
+//                     setTimeout(() => {
+//                         this.velocity = {
+//                             x: 100, y: 100
+//                         }
+//                         setTimeout(() => {
+//                             this.velocity = {
+//                                 x: -100, y: 100
+//                             }
+//                             this.setFlightPattern()
+//                         }, 200)
+//                     }, 200)
+//                 }, 200)
+//             }, 200)
+//         }, 1000)
+
+//     }, 1000)
+   
+    
+// }
+  flapWings() {
+
+  }
+ 
   draw(ctx) {
     ctx.drawImage( this.img1, this.position.x, this.position.y, this.width, this.height)
   }
