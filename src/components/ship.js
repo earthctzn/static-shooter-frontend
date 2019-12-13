@@ -33,6 +33,7 @@ class Ship {
 
   update(deltaTime) {
     if (!deltaTime) return;
+    console.log(this.location)
     this.location.x += this.speed
     if (this.location.x < 0) this.location.x = 0
     if (this.location.x + this.width > this.gameWidth)

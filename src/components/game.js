@@ -22,7 +22,6 @@ class Game {
       switch(e.keyCode) {
         case 32:
             this.addBullets()
-            this.goodBullet.draw(this.ctx)
           break
       }
     })
@@ -30,14 +29,8 @@ class Game {
 
   addBullets() {
     console.log(this.ship.location)
-    this.goodBullet = new GoodBullet(this.ship.location)
-    this.bullets.push(this.goodBullet)
-    // for (let b of this.bullets) {
-    //   console.log(b)
-    //   b.startingLoc = this.ship.location
-    // }
-    
-    
+    const goodBullet = new GoodBullet({...this.ship.location})
+    this.bullets.push(goodBullet)    
   }
 
 

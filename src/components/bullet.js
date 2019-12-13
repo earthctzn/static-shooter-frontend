@@ -1,5 +1,5 @@
 class Bullet {
-  constructor(startingLoc= {x: 380, y: 500}, velocity = {x: 0, y: -10}, size = {x:20, y: 20}){
+  constructor(startingLoc= {x: 380, y: 530}, velocity, size){
     this.startingLoc = startingLoc
     this.size = size
     this.velocity = velocity
