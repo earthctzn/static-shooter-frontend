@@ -49,6 +49,6 @@ class Galaxian {
     // }
 
     draw(ctx) {
-        ctx.drawImage(this.img1, this.position.x, this.position.y, this.width, this.height)
+        ctx.drawImage(this.img1, this.location.x, this.location.y, this.width, this.height)
     }
 }
