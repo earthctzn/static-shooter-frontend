@@ -2,8 +2,8 @@ class Galaxian {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth
         this.velocity = {
-            x: 10,
-            y: 10
+            x: 20,
+            y: 20
         }
         this.maxSpeed = 7
         this.speed = 0
@@ -12,42 +12,48 @@ class Galaxian {
 
     setFlightPattern() {
         setTimeout(() => {
+            this.fire({...this.location })
             this.velocity = {
-                x: 1000,
+                x: 35,
                 y: 10
             }
             setTimeout(() => {
+                this.fire({...this.location })
                 this.velocity = {
-                    x: 0,
-                    y: 90
+                    x: 23,
+                    y: -7
                 }
                 setTimeout(() => {
+                    this.fire({...this.location })
                     this.velocity = {
-                        x: -100,
-                        y: -100
+                        x: -45,
+                        y: 6
                     }
                     setTimeout(() => {
+                        this.fire({...this.location })
                         this.velocity = {
-                            x: 100,
-                            y: -100
+                            x: 20,
+                            y: 0
                         }
                         setTimeout(() => {
+                            this.fire({...this.location })
                             this.velocity = {
-                                x: 100,
-                                y: 100
+                                x: -20,
+                                y: 0
                             }
                             setTimeout(() => {
+                                this.fire({...this.location })
                                 this.velocity = {
-                                    x: -100,
-                                    y: 100
+                                    x: -60,
+                                    y: -4
                                 }
                                 this.setFlightPattern()
-                            }, 200)
-                        }, 200)
-                    }, 200)
-                }, 200)
-            }, 1000)
-        }, 1000)
+                            }, 2000)
+                        }, 2000)
+                    }, 2000)
+                }, 1000)
+            }, 2000)
+        }, 4000)
     }
     updateLocation() {
         this.location = {

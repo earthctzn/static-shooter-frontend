@@ -6,7 +6,7 @@ class Galaxian2 extends Galaxian {
         this.width = this.img1.width
         this.height = this.img1.height
         this.location = {
-            x: gameWidth / 2 - this.width / 2 + 40,
+            x: gameWidth / 2 - this.width / 2 - 250,
             y: gameHeight - this.height - 350
         }
         this.points = 300

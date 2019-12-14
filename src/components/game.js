@@ -9,7 +9,7 @@ class Game {
         this.addGalaxians()
         this.createShip()
         this.gameLoop()
-            // this.startAttack()
+
     }
 
     bindingsAndListeners() {
@@ -36,6 +36,7 @@ class Game {
         for (let g of this.galaxians) {
             g.getShipLoc = this.locateShip.bind(this)
             g.fire = this.enemyFire.bind(this)
+            g.fly = this.startFlight.bind(this)
         }
     }
 
@@ -55,21 +56,21 @@ class Game {
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
-    startAttack() {
+    startFlight() {
         this.interval = setInterval(() => {
             this.ctx.fillRect(0, 0, this.gameWidth, this.gameHeight)
             for (let p of this.galaxians) {
                 p.updateLocation()
                 p.draw(this.ctx)
-                p.fire({...p.location })
-                const newEnemies = this.galaxians.filter(p => p.location.y < 600)
-                const lostEnemies = this.galaxians.length - newEnemies.length
-                this.galaxians = newEnemies
-                for (let i = 0; i < lostEnemies; i++) {
+                    // p.fire({...p.location })
+                const newGalaxians = this.galaxians.filter(p => p.location.y < 600)
+                const lostGalaxians = this.galaxians.length - newGalaxians.length
+                this.galaxians = newGalaxians
+                for (let i = 0; i < lostGalaxians; i++) {
                     this.addGalaxians()
                 }
             }
-        }, 10)
+        }, 5000)
     }
     gameLoop(timestamp) {
         this.deltaTime = timestamp - this.lastTime
@@ -82,6 +83,7 @@ class Game {
         this.ship.update(this.deltaTime);
         this.ship.draw(this.ctx)
         this.createGalaxians()
+        this.startFlight()
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }
