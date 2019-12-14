@@ -9,7 +9,7 @@ class Game {
         this.addGalaxians()
         this.createShip()
         this.gameLoop()
-        this.startAttack()
+            // this.startAttack()
     }
 
     bindingsAndListeners() {
@@ -61,10 +61,11 @@ class Game {
             for (let p of this.galaxians) {
                 p.updateLocation()
                 p.draw(this.ctx)
+                p.fire({...p.location })
                 const newEnemies = this.galaxians.filter(p => p.location.y < 600)
-                const lostProjectiles = this.galaxians.length - newEnemies.length
+                const lostEnemies = this.galaxians.length - newEnemies.length
                 this.galaxians = newEnemies
-                for (let i = 0; i < lostProjectiles; i++) {
+                for (let i = 0; i < lostEnemies; i++) {
                     this.addGalaxians()
                 }
             }
