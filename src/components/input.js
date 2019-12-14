@@ -9,6 +9,9 @@ class InputHandler {
                 case 39:
                     ship.moveRight()
                     break
+                case 32:
+                    ship.fire({...ship.location })
+                    break
             }
             document.addEventListener('keyup', (e) => {
                 switch (e.keyCode) {

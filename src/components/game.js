@@ -18,43 +18,29 @@ class Game {
         this.gameHeight = this.canvas.height;
         this.lastTime = 0
         this.deltaTime = 0
-        this.listener = document.addEventListener('keydown', (e) => {
-            switch (e.keyCode) {
-                case 32:
-                    this.addBullets()
-                    break
-            }
-        })
     }
 
-    addBullets() {
-        const badBullet = new BadBullet({...this.galaxian2.location })
-        const goodBullet = new GoodBullet({...this.ship.location })
-        this.bullets.push(goodBullet, badBullet)
-            // for (let b of this.bullets) {
-            //     for (let g of this.galaxians) {
-            //         b.startingLoc = g.location
-            //     }
-            // }
+    shipFire(startingLoc) {
+        const goodBullet = new GoodBullet(startingLoc)
+        this.bullets.push(goodBullet)
     }
-
 
     addGalaxians() {
         const galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight)
-        this.galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight)
-        this.galaxians.push(galaxian1, this.galaxian2)
+        const galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight)
+        this.galaxians.push(galaxian1, galaxian2)
         for (let g of this.galaxians) {
             g.getShipLoc = this.locateShip.bind(this)
-
-            // g.atkPatern = this.setFlightPattern.bind(this)
+            g.fire = this.enemyFire.bind(this)
         }
     }
-
-
+    enemyFire(startingLoc) {
+        const badBullet = new BadBullet(startingLoc)
+        this.bullets.push(badBullet)
+    }
     locateShip() {
         return this.ship.location
     }
-
 
     createGalaxians() {
         //I need to be able to add a number of galaxians of all types with both images for each.
@@ -65,24 +51,24 @@ class Game {
     createShip() {
         this.ship = new Ship(this.gameWidth, this.gameHeight)
         new InputHandler(this.ship)
+        this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
 
     gameLoop(timestamp) {
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
-
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
         for (let b of this.bullets) {
             b.update(this.deltaTime)
             b.draw(this.ctx)
-                // console.log(b.location)
         }
-
         this.ship.update(this.deltaTime);
         this.ship.draw(this.ctx)
         this.createGalaxians()
-
+        for (let g of this.galaxians) {
+            // g.shoot()
+        }
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }
