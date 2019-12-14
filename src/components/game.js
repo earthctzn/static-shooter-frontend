@@ -9,6 +9,7 @@ class Game {
         this.addGalaxians()
         this.createShip()
         this.gameLoop()
+        this.startAttack()
     }
 
     bindingsAndListeners() {
@@ -24,7 +25,10 @@ class Game {
         const goodBullet = new GoodBullet(startingLoc)
         this.bullets.push(goodBullet)
     }
-
+    enemyFire(startingLoc) {
+        const badBullet = new BadBullet(startingLoc)
+        this.bullets.push(badBullet)
+    }
     addGalaxians() {
         const galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight)
         const galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight)
@@ -34,10 +38,7 @@ class Game {
             g.fire = this.enemyFire.bind(this)
         }
     }
-    enemyFire(startingLoc) {
-        const badBullet = new BadBullet(startingLoc)
-        this.bullets.push(badBullet)
-    }
+
     locateShip() {
         return this.ship.location
     }
@@ -54,7 +55,21 @@ class Game {
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
-
+    startAttack() {
+        this.interval = setInterval(() => {
+            this.ctx.fillRect(0, 0, this.gameWidth, this.gameHeight)
+            for (let p of this.galaxians) {
+                p.updateLocation()
+                p.draw(this.ctx)
+                const newEnemies = this.galaxians.filter(p => p.location.y < 600)
+                const lostProjectiles = this.galaxians.length - newEnemies.length
+                this.galaxians = newEnemies
+                for (let i = 0; i < lostProjectiles; i++) {
+                    this.addGalaxians()
+                }
+            }
+        }, 10)
+    }
     gameLoop(timestamp) {
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
@@ -66,9 +81,6 @@ class Game {
         this.ship.update(this.deltaTime);
         this.ship.draw(this.ctx)
         this.createGalaxians()
-        for (let g of this.galaxians) {
-            // g.shoot()
-        }
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }

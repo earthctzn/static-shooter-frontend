@@ -11,4 +11,5 @@ class Galaxian1 extends Galaxian {
         }
         this.points = 100
     }
+
 }
