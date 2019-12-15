@@ -82,7 +82,7 @@ class Game {
         this.ship.update(this.deltaTime);
         this.ship.draw(this.ctx)
         this.createGalaxians()
-        this.startFlight()
+            // this.startFlight()
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }
