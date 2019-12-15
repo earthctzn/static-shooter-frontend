@@ -11,14 +11,25 @@
 </head>
 
 <body class="wrapper">
-    <canvas id='gameSpace' width="800" height="600"></canvas>
+    <canvas id='gameSpace' width="700" height="800"></canvas>
+    <div id="score-board">
+        <h1 id="title">1up</h1>
+        <h2 id="score">234567</h2>
+    </div>
+    <div id="record">
+        <h1 id="title">high score</h1>
+        <h2 id="score">18988</h2>
+    </div>
+    <div id="lives">
+        <h1 id="title"> ships will go here</h1>
+    </div>
 
 
 
     <!-- Background -->
     <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function() {
             let move = 0
             setInterval(function() {
@@ -26,7 +37,7 @@
                 $('canvas').css('background-position-y', move + 'px')
             }, 10)
         })
-    </script>
+    </script> -->
 
     <!-- Good guy -->
     <img class="img" id="ship" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/ship.png">
@@ -50,7 +61,7 @@
 
 
     <!-- scripts -->
-
+    <script src="src/components/collisions.js"></script>
     <script src="src/components/bullet.js"></script>
     <script src="src/components/badbullets.js"></script>
     <script src="src/components/goodbullets.js"></script>

@@ -62,8 +62,7 @@ class Game {
             for (let p of this.galaxians) {
                 p.updateLocation()
                 p.draw(this.ctx)
-                    // p.fire({...p.location })
-                const newGalaxians = this.galaxians.filter(p => p.location.y < 600)
+                const newGalaxians = this.galaxians.filter(p => p.location.y > -6)
                 const lostGalaxians = this.galaxians.length - newGalaxians.length
                 this.galaxians = newGalaxians
                 for (let i = 0; i < lostGalaxians; i++) {

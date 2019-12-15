@@ -11,7 +11,7 @@ class Ship {
         this.goodBullets = []
         this.location = {
             x: gameWidth / 2 - this.width / 2,
-            y: gameHeight - this.height - 30
+            y: gameHeight - this.height - 60
         }
     }
     moveLeft() {

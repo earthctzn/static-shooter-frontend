@@ -2,8 +2,8 @@ class Galaxian {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth
         this.velocity = {
-            x: 20,
-            y: 20
+            x: 0,
+            y: 0
         }
         this.maxSpeed = 7
         this.speed = 0
@@ -15,19 +15,19 @@ class Galaxian {
             this.fire({...this.location })
             this.velocity = {
                 x: 35,
-                y: 10
+                y: 5
             }
             setTimeout(() => {
                 this.fire({...this.location })
                 this.velocity = {
-                    x: 23,
-                    y: -7
+                    x: 20,
+                    y: 7
                 }
                 setTimeout(() => {
                     this.fire({...this.location })
                     this.velocity = {
-                        x: -45,
-                        y: 6
+                        x: -25,
+                        y: -6
                     }
                     setTimeout(() => {
                         this.fire({...this.location })
@@ -38,22 +38,22 @@ class Galaxian {
                         setTimeout(() => {
                             this.fire({...this.location })
                             this.velocity = {
-                                x: -20,
+                                x: -30,
                                 y: 0
                             }
                             setTimeout(() => {
                                 this.fire({...this.location })
                                 this.velocity = {
-                                    x: -60,
-                                    y: -4
-                                }
-                                this.setFlightPattern()
+                                        x: -40,
+                                        y: -5
+                                    }
+                                    // this.setFlightPattern()
                             }, 2000)
                         }, 2000)
                     }, 2000)
                 }, 1000)
             }, 2000)
-        }, 4000)
+        }, 2000)
     }
     updateLocation() {
         this.location = {
