@@ -4,21 +4,30 @@ class Game {
 
         this.bullets = []
         this.galaxians = []
-        this.bindingsAndListeners()
-        this.createGalaxians()
+
+        this.bindings()
         this.addGalaxians()
+        this.createGalaxians()
         this.createShip()
         this.gameLoop()
 
     }
 
-    bindingsAndListeners() {
+    bindings() {
         this.canvas = document.getElementById('gameSpace');
         this.ctx = this.canvas.getContext('2d')
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
         this.lastTime = 0
         this.deltaTime = 0
+        const GAMESTATE = {
+            PAUSED: 0,
+            RUNNING: 1,
+            MENU: 2,
+            GAMEOVER: 3,
+            NEWLVL: 4
+        }
+        this.gameState = GAMESTATE.MENU
     }
 
     shipFire(startingLoc) {

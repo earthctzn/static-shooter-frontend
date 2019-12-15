@@ -44,10 +44,10 @@ class Galaxian {
                             setTimeout(() => {
                                 this.fire({...this.location })
                                 this.velocity = {
-                                        x: -40,
-                                        y: -5
-                                    }
-                                    // this.setFlightPattern()
+                                    x: -40,
+                                    y: -3
+                                }
+                                this.setFlightPattern()
                             }, 2000)
                         }, 2000)
                     }, 2000)
