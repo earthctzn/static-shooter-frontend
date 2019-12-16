@@ -7,6 +7,7 @@ class Galaxian {
         }
         this.maxSpeed = 7
         this.speed = 0
+        this.markedForDeletion = false
         this.setFlightPattern()
     }
 

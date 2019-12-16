@@ -1,16 +1,14 @@
 class Game {
     constructor() {
         // this.adapter = new GameAdapter()
-
         this.bullets = []
         this.galaxians = []
-
+        this.ships = []
         this.bindings()
         this.addGalaxians()
         this.createGalaxians()
         this.createShip()
         this.gameLoop()
-
     }
 
     bindings() {
@@ -46,6 +44,7 @@ class Game {
             g.getShipLoc = this.locateShip.bind(this)
             g.fire = this.enemyFire.bind(this)
             g.fly = this.startFlight.bind(this)
+
         }
     }
 
@@ -68,19 +67,23 @@ class Game {
         const rightOfObj = obj2.location.x + obj2.width
         if (bttmOfBul <= topOfObj || topOfBul >= bottomOfObject) return false
         if (obj1.location.x >= rightOfObj || obj1.location.x + obj1.size.x <= leftOfObj) return false
-        console.log('kill')
+        obj2.markedForDeletion = true
+        obj1.markedForDeletion = true
         return true
     }
     createShip() {
-        this.ship = new Ship(this.gameWidth, this.gameHeight)
-        new InputHandler(this.ship)
-        this.ship.fire = this.shipFire.bind(this)
-        this.ship.draw(this.ctx);
+        this.ships.push(new Ship(this.gameWidth, this.gameHeight))
+        for (let ship of this.ships) {
+            new InputHandler(ship)
+            ship.fire = this.shipFire.bind(this)
+            ship.draw(this.ctx);
+        }
+
     }
     startFlight() {
         this.interval = setInterval(() => {
-            this.ctx.fillRect(0, 0, this.gameWidth, this.gameHeight)
             for (let p of this.galaxians) {
+                this.galaxians = this.galaxians.filter(obj => !obj.markedForDeletion)
                 p.updateLocation()
                 p.draw(this.ctx)
                 const newGalaxians = this.galaxians.filter(p => p.location.y > -6)
@@ -97,56 +100,35 @@ class Game {
         this.lastTime = timestamp
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
         for (let b of this.bullets) {
-            b.update(this.deltaTime, this)
+            this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
+            b.update(this.deltaTime)
             b.draw(this.ctx)
             if (b.constructor.name === "BadBullet") {
-                this.checkCollision(b, this.ship)
+                for (let ship of this.ships) {
+                    this.checkCollision(b, ship)
+                }
             } else if (b.constructor.name == "GoodBullet") {
                 for (let g of this.galaxians) {
                     this.checkCollision(b, g)
                 }
             }
         }
-        this.ship.update(this.deltaTime);
-        this.ship.draw(this.ctx)
+        // for (let g of this.galaxians) {
+        //     console.log(g.markedForDeletion)
+        //     this.galaxians = this.galaxians.filter(p => !p.markedForDeletion)
+        //     g.updateLocation(this.deltaTime)
+        //     g.draw(this.ctx)
+        // }
+
+        for (let ship of this.ships) {
+
+            this.ships = this.ships.filter(obj => !obj.markedForDeletion)
+                // console.log(this.ships)
+            ship.update(this.deltaTime);
+            ship.draw(this.ctx)
+        }
         this.createGalaxians()
             // this.startFlight()
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-// const canvas = document.getElementById('gameSpace');
-// const ctx = canvas.getContext('2d')
-// const gameWidth = canvas.width;
-// const gameHeight = canvas.height;
-// let lastTime = 0
-// let ship = new Ship(gameWidth, gameHeight)
-// let galaxian = new Galaxian(gameWidth, gameHeight)
-// new InputHandler(ship)
-
-//   function gameLoop(timestamp) {
-
-//     let deltaTime = timestamp - lastTime
-//     lastTime = timestamp
-
-//     ctx.clearRect(0,0, gameWidth, gameHeight);
-
-//     ship.update(deltaTime);
-//     ship.draw(ctx)
-//     galaxian.draw(ctx)
-//     looper();
-//     // setInterval(flapWings, 500)
-//     requestAnimationFrame(gameLoop)
-//   }
-// gameLoop()
-// }

@@ -8,7 +8,7 @@ class Ship {
         this.height = this.img.height
         this.maxSpeed = 6
         this.speed = 0
-        this.goodBullets = []
+        this.markedForDeletion = false
         this.location = {
             x: gameWidth / 2 - this.width / 2,
             y: gameHeight - this.height - 60

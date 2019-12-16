@@ -3,6 +3,7 @@ class Bullet {
         this.location = startingLoc
         this.size = size
         this.velocity = velocity
+        this.markedForDeletion = false
     }
 
     update(deltaTime, game) {
