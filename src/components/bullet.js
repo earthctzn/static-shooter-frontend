@@ -1,17 +1,17 @@
 class Bullet {
     constructor(startingLoc = { x: 380, y: 530 }, velocity, size) {
-        this.startingLoc = startingLoc
+        this.location = startingLoc
         this.size = size
         this.velocity = velocity
     }
 
-    update(deltaTime) {
+    update(deltaTime, game) {
         if (!deltaTime) return;
-        this.startingLoc.x += this.velocity.x * deltaTime
-        this.startingLoc.y += this.velocity.y * deltaTime
+        this.location.x += this.velocity.x * deltaTime
+        this.location.y += this.velocity.y * deltaTime
     }
 
     draw(ctx) {
-        ctx.drawImage(this.imag, this.startingLoc.x, this.startingLoc.y, this.size.x, this.size.y)
+        ctx.drawImage(this.imag, this.location.x, this.location.y, this.size.x, this.size.y)
     }
 }

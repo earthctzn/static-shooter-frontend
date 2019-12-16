@@ -30,12 +30,12 @@ class Game {
         this.gameState = GAMESTATE.MENU
     }
 
-    shipFire(startingLoc) {
-        const goodBullet = new GoodBullet(startingLoc)
+    shipFire(location) {
+        const goodBullet = new GoodBullet(location)
         this.bullets.push(goodBullet)
     }
-    enemyFire(startingLoc) {
-        const badBullet = new BadBullet(startingLoc)
+    enemyFire(location) {
+        const badBullet = new BadBullet(location)
         this.bullets.push(badBullet)
     }
     addGalaxians() {
@@ -59,6 +59,18 @@ class Game {
             g.draw(this.ctx)
     }
 
+    checkCollision(obj1, obj2) {
+        const bttmOfBul = obj1.location.y + obj1.size.y
+        const topOfBul = obj1.location.y
+        const topOfObj = obj2.location.y
+        const bottomOfObject = obj2.location.y + obj2.height
+        const leftOfObj = obj2.location.x
+        const rightOfObj = obj2.location.x + obj2.width
+        if (bttmOfBul <= topOfObj || topOfBul >= bottomOfObject) return false
+        if (obj1.location.x >= rightOfObj || obj1.location.x + obj1.size.x <= leftOfObj) return false
+        console.log('kill')
+        return true
+    }
     createShip() {
         this.ship = new Ship(this.gameWidth, this.gameHeight)
         new InputHandler(this.ship)
@@ -78,15 +90,22 @@ class Game {
                     this.addGalaxians()
                 }
             }
-        }, 5000)
+        }, 3000)
     }
     gameLoop(timestamp) {
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
         for (let b of this.bullets) {
-            b.update(this.deltaTime)
+            b.update(this.deltaTime, this)
             b.draw(this.ctx)
+            if (b.constructor.name === "BadBullet") {
+                this.checkCollision(b, this.ship)
+            } else if (b.constructor.name == "GoodBullet") {
+                for (let g of this.galaxians) {
+                    this.checkCollision(b, g)
+                }
+            }
         }
         this.ship.update(this.deltaTime);
         this.ship.draw(this.ctx)
