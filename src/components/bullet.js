@@ -6,7 +6,7 @@ class Bullet {
         this.markedForDeletion = false
     }
 
-    update(deltaTime, game) {
+    update(deltaTime) {
         if (!deltaTime) return;
         this.location.x += this.velocity.x * deltaTime
         this.location.y += this.velocity.y * deltaTime

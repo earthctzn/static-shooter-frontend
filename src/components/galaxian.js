@@ -13,7 +13,10 @@ class Galaxian {
 
     setFlightPattern() {
         setTimeout(() => {
-            this.fire({...this.location })
+            if (!this.markedForDeletion) {
+                this.fire({...this.location })
+            }
+
             this.velocity = {
                 x: 35,
                 y: 5
@@ -56,7 +59,7 @@ class Galaxian {
             }, 2000)
         }, 2000)
     }
-    updateLocation() {
+    update() {
         this.location = {
             x: this.location.x + this.velocity.x * 0.01,
             y: this.location.y + this.velocity.y * 0.01

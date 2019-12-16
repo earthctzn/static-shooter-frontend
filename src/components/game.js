@@ -33,8 +33,10 @@ class Game {
         this.bullets.push(goodBullet)
     }
     enemyFire(location) {
+
         const badBullet = new BadBullet(location)
         this.bullets.push(badBullet)
+
     }
     addGalaxians() {
         const galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight)
@@ -78,13 +80,11 @@ class Game {
             ship.fire = this.shipFire.bind(this)
             ship.draw(this.ctx);
         }
-
     }
     startFlight() {
         this.interval = setInterval(() => {
             for (let p of this.galaxians) {
-                this.galaxians = this.galaxians.filter(obj => !obj.markedForDeletion)
-                p.updateLocation()
+                p.update()
                 p.draw(this.ctx)
                 const newGalaxians = this.galaxians.filter(p => p.location.y > -6)
                 const lostGalaxians = this.galaxians.length - newGalaxians.length
@@ -99,8 +99,10 @@ class Game {
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+        this.ships = this.ships.filter(obj => !obj.markedForDeletion)
+        this.galaxians = this.galaxians.filter(p => !p.markedForDeletion)
+        this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
         for (let b of this.bullets) {
-            this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
             b.update(this.deltaTime)
             b.draw(this.ctx)
             if (b.constructor.name === "BadBullet") {
@@ -113,22 +115,14 @@ class Game {
                 }
             }
         }
-        // for (let g of this.galaxians) {
-        //     console.log(g.markedForDeletion)
-        //     this.galaxians = this.galaxians.filter(p => !p.markedForDeletion)
-        //     g.updateLocation(this.deltaTime)
-        //     g.draw(this.ctx)
-        // }
 
         for (let ship of this.ships) {
-
-            this.ships = this.ships.filter(obj => !obj.markedForDeletion)
-                // console.log(this.ships)
             ship.update(this.deltaTime);
             ship.draw(this.ctx)
         }
+
         this.createGalaxians()
-            // this.startFlight()
+        this.startFlight()
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }
