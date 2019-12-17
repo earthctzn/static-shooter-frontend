@@ -27,51 +27,44 @@ class Galaxian {
     }
 
     setFlightPattern() {
-
-
+        let rand = Math.floor(Math.random() * 3000) + 100
         setTimeout(() => {
-
             this.velocity = {
                 x: Math.floor(Math.random() * 100) + -20,
                 y: Math.floor(Math.random() * -100) + -20
             }
             setTimeout(() => {
-
                 this.velocity = {
                     x: Math.floor(Math.random() * 100) + 50,
                     y: Math.floor(Math.random() * 100) + 20
                 }
                 setTimeout(() => {
-
                     this.velocity = {
                         x: Math.floor(Math.random() * -100) + -50,
                         y: Math.floor(Math.random() * 100) + 20
                     }
                     setTimeout(() => {
-
                         this.velocity = {
                             x: Math.floor(Math.random() * 100) + 50,
                             y: Math.floor(Math.random() * 100) + 20
                         }
                         setTimeout(() => {
-
                             this.velocity = {
                                 x: Math.floor(Math.random() * -100) + -100,
                                 y: Math.floor(Math.random() * -100) + -20
                             }
                             setTimeout(() => {
-
                                 this.velocity = {
                                     x: Math.floor(Math.random() * 100) + 20,
                                     y: Math.floor(Math.random() * 100) + 20
                                 }
                                 this.setFlightPattern()
-                            }, 2000)
-                        }, 1000)
-                    }, 2000)
-                }, 1000)
-            }, 1000)
-        }, 1000)
+                            }, rand)
+                        }, rand)
+                    }, rand)
+                }, rand)
+            }, rand)
+        }, rand)
     }
     update() {
         this.location = {
