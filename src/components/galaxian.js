@@ -17,7 +17,7 @@ class Galaxian {
         this.fire({...this.location }, this)
     }
     setAttackPattern() {
-        let rand = Math.floor(Math.random() * 3000) + 100
+        let rand = Math.floor(Math.random() * 3000) + 500
         setTimeout(() => {
                 this.shoot()
                 this.setAttackPattern()
@@ -50,7 +50,7 @@ class Galaxian {
                         }
                         setTimeout(() => {
                             this.velocity = {
-                                x: Math.floor(Math.random() * -100) + -100,
+                                x: Math.floor(Math.random() * 100) + -100,
                                 y: Math.floor(Math.random() * -100) + -20
                             }
                             setTimeout(() => {

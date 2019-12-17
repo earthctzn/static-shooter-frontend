@@ -80,18 +80,12 @@ class Game {
     gameLoop(timestamp) {
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
-            // for (let g of this.galaxians) {
-            //     if (g.location.y > -g.height) {
-            //         g.markedForDeletion = true
-            //     } else if (g.location.y > this.height) {
-            //         console.log(this.height)
-            //         g.markedForDeletion = true
-            //     }
-            // }
-        this.ships = this.ships.filter(obj => !obj.markedForDeletion)
         this.galaxians = this.galaxians.filter(p => !p.markedForDeletion)
+        this.ships = this.ships.filter(obj => !obj.markedForDeletion)
         this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+
+        //check for collisions with all bullet types
         for (let b of this.bullets) {
             b.update(this.deltaTime)
             b.draw(this.ctx)
@@ -100,6 +94,7 @@ class Game {
                 for (let ship of this.ships) {
                     if (this.checkCollision(b, ship)) {
                         ship.markedForDeletion = true
+                        b.markedForDeletion = true
                     }
                 }
             } else if (b.constructor.name == "GoodBullet") {
@@ -107,29 +102,34 @@ class Game {
                 for (let g of this.galaxians) {
                     if (this.checkCollision(b, g)) {
                         g.markedForDeletion = true
+                        b.markedForDeletion = true
                     }
                 }
             }
         }
+        //Check if any galaxian type is off the top or bottom of the screen
         for (let p of this.galaxians) {
-            if (!p.markedForDeletion) {
-                p.update()
-                p.draw(this.ctx)
+            p.update()
+            p.draw(this.ctx)
+            if (p.location.y < 0) {
+                p.markedForDeletion = true
             }
-            const newGalaxians = this.galaxians.filter(p => p.location.y > -p.height)
-            const lostGalaxians = this.galaxians.length - newGalaxians.length
-
-            this.galaxians = newGalaxians
-            for (let i = 0; i < lostGalaxians; i++) {
-                this.addGalaxians()
+            if (p.location.y > 800 + p.height) {
+                p.markedForDeletion = true
             }
-
         }
+        // const newGalaxians = this.galaxians.filter(p => p.markedForDeletion == false)
+        // const lostGalaxians = this.galaxians.legth - newGalaxians.length
+        // this.galaxians = newGalaxians
+        // for (let i = 0; i < lostGalaxians; i++) {
+        //     this.createGalaxians()
+        // }
 
         // console.log(this.galaxians[0].markedForDeletion)
         for (let ship of this.ships) {
             ship.update(this.deltaTime);
             ship.draw(this.ctx)
+
         }
 
         this.createGalaxians()

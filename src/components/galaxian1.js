@@ -1,8 +1,8 @@
 class Galaxian1 extends Galaxian {
     constructor(gameWidth, gameHeight, locateShip, enemyFire) {
         super(gameWidth, gameHeight, locateShip, enemyFire)
-        this.img1 = document.querySelector('#baddie1-a')
-        this.img2 = document.querySelector('#baddie1-b')
+        this.img1 = document.getElementById('baddie1-a')
+        this.img2 = document.getElementById('baddie1-b')
         this.width = this.img1.width
         this.height = this.img1.height
         this.location = {
