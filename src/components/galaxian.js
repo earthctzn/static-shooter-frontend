@@ -1,5 +1,5 @@
 class Galaxian {
-    constructor(gameWidth, gameHeight) {
+    constructor(gameWidth, gameHeight, locateShip, enemyFire) {
         this.gameWidth = gameWidth
         this.velocity = {
             x: 0,
@@ -7,57 +7,71 @@ class Galaxian {
         }
         this.maxSpeed = 7
         this.speed = 0
+        this.locateShip = locateShip
+        this.fire = enemyFire
         this.markedForDeletion = false
         this.setFlightPattern()
+        this.setAttackPattern()
+    }
+    shoot() {
+        this.fire({...this.location }, this)
+    }
+    setAttackPattern() {
+        let rand = Math.floor(Math.random() * 3000) + 100
+        setTimeout(() => {
+                this.shoot()
+                this.setAttackPattern()
+            },
+            rand)
+
     }
 
     setFlightPattern() {
+
+
         setTimeout(() => {
-            if (!this.markedForDeletion) {
-                this.fire({...this.location })
-            }
 
             this.velocity = {
-                x: 35,
-                y: 5
+                x: Math.floor(Math.random() * 100) + -20,
+                y: Math.floor(Math.random() * -100) + -20
             }
             setTimeout(() => {
-                this.fire({...this.location })
+
                 this.velocity = {
-                    x: 20,
-                    y: 7
+                    x: Math.floor(Math.random() * 100) + 50,
+                    y: Math.floor(Math.random() * 100) + 20
                 }
                 setTimeout(() => {
-                    this.fire({...this.location })
+
                     this.velocity = {
-                        x: -25,
-                        y: -6
+                        x: Math.floor(Math.random() * -100) + -50,
+                        y: Math.floor(Math.random() * 100) + 20
                     }
                     setTimeout(() => {
-                        this.fire({...this.location })
+
                         this.velocity = {
-                            x: 20,
-                            y: 0
+                            x: Math.floor(Math.random() * 100) + 50,
+                            y: Math.floor(Math.random() * 100) + 20
                         }
                         setTimeout(() => {
-                            this.fire({...this.location })
+
                             this.velocity = {
-                                x: -30,
-                                y: 0
+                                x: Math.floor(Math.random() * -100) + -100,
+                                y: Math.floor(Math.random() * -100) + -20
                             }
                             setTimeout(() => {
-                                this.fire({...this.location })
+
                                 this.velocity = {
-                                    x: -40,
-                                    y: -3
+                                    x: Math.floor(Math.random() * 100) + 20,
+                                    y: Math.floor(Math.random() * 100) + 20
                                 }
                                 this.setFlightPattern()
                             }, 2000)
-                        }, 2000)
+                        }, 1000)
                     }, 2000)
                 }, 1000)
-            }, 2000)
-        }, 2000)
+            }, 1000)
+        }, 1000)
     }
     update() {
         this.location = {

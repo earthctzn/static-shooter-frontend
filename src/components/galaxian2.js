@@ -1,6 +1,6 @@
 class Galaxian2 extends Galaxian {
-    constructor(gameWidth, gameHeight) {
-        super(gameWidth, gameHeight)
+    constructor(gameWidth, gameHeight, locateShip, enemyFire) {
+        super(gameWidth, gameHeight, locateShip, enemyFire)
         this.img1 = document.getElementById('baddie2-a')
         this.img2 = document.getElementById('baddie2-b')
         this.width = this.img1.width
