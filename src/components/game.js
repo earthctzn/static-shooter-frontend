@@ -47,9 +47,13 @@ class Game {
 
     }
     addGalaxians() {
-        const galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight, this.locateShip.bind(this), this.enemyFire.bind(this))
-        const galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight, this.locateShip.bind(this), this.enemyFire.bind(this))
-        this.galaxians.push(galaxian1, galaxian2)
+        let count = 6
+        for (let i = 0; i < count; i++) {
+            const galaxian1 = new Galaxian1(this.gameWidth, this.gameHeight, this.locateShip.bind(this), this.enemyFire.bind(this))
+            const galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight, this.locateShip.bind(this), this.enemyFire.bind(this))
+            this.galaxians.push(galaxian1, galaxian2)
+        }
+
     }
     createGalaxians() {
         //I need to be able to add a number of galaxians of all types with both images for each.
@@ -61,7 +65,10 @@ class Game {
         return this.ship.location
     }
     createShip() {
-        this.ship = new Ship(this.gameWidth, this.gameHeight)
+        for (let i = 0; i < this.lives; i++) {
+            this.ship = new Ship(this.gameWidth, this.gameHeight)
+        }
+
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
@@ -123,12 +130,16 @@ class Game {
         // for (let i = 0; i < lostGalaxians; i++) {
         //     this.createGalaxians()
         // }
-
+        if (this.galaxians.length === 0) {
+            this.addGalaxians()
+            this.createGalaxians()
+        }
         // console.log(this.galaxians[0].markedForDeletion)
         if (!this.ship.markedForDeletion) {
             this.ship.update(this.deltaTime);
             this.ship.draw(this.ctx)
         }
+
     }
 
     gameLoop(timestamp) {
@@ -142,7 +153,6 @@ class Game {
         this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
         this.update(this.deltaTime)
-        this.createGalaxians()
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }

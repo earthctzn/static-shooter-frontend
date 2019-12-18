@@ -12,6 +12,8 @@ class Galaxian {
         this.markedForDeletion = false
         this.setFlightPattern()
         this.setAttackPattern()
+
+
     }
     shoot() {
         this.fire({...this.location }, this)
