@@ -2,6 +2,11 @@ class Ship {
 
     constructor(gameWidth, gameHeight) {
         this.img = document.getElementById('ship')
+        this.exp1 = document.getElementById("boom-1")
+        this.exp2 = document.getElementById("boom-2")
+        this.exp3 = document.getElementById("boom-3")
+        this.exp4 = document.getElementById("boom-4")
+        this.exp5 = document.getElementById("boom-5")
             // this.missile = document.getElementById('goodMissile')
         this.gameWidth = gameWidth
         this.width = this.img.width
@@ -25,7 +30,28 @@ class Ship {
     stop() {
         this.speed = 0
     }
+    drawExp(ctx) {
+        setTimeout(() => {
+            ctx.drawImage(this.exp1, this.location.x, this.location.y, this.width, this.height)
+            setTimeout(() => {
+                ctx.drawImage(this.exp2, this.location.x, this.location.y, this.width, this.height)
+                setTimeout(() => {
+                    ctx.drawImage(this.exp3, this.location.x, this.location.y, this.width, this.height)
+                    setTimeout(() => {
+                        ctx.drawImage(this.exp4, this.location.x, this.location.y, this.width, this.height)
+                        setTimeout(() => {
+                            ctx.drawImage(this.exp5, this.location.x, this.location.y, this.width, this.height)
+                        }, 200)
 
+                    }, 200)
+
+                }, 200)
+
+            }, 200)
+
+        }, 200)
+
+    }
     draw(ctx) {
         // ctx.clearRect(0, 0, 800, 600)
         ctx.drawImage(this.img, this.location.x, this.location.y, this.width, this.height)

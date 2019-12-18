@@ -1,7 +1,9 @@
 class InputHandler {
-    constructor(ship) {
+    constructor(ship, game) {
+        if (ship === null) {
+            return
+        }
         document.addEventListener('keydown', (e) => {
-
             switch (e.keyCode) {
                 case 37:
                     ship.moveLeft()

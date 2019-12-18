@@ -11,33 +11,27 @@
 </head>
 
 <body class="wrapper">
-    <canvas id='gameSpace' width="700" height="800"></canvas>
+    <canvas id='gameSpace' width="800" height="800"></canvas>
     <div id="score-board">
         <h1 id="title">1up</h1>
         <h2 id="score">234567</h2>
     </div>
     <div id="record">
         <h1 id="title">high score</h1>
-        <h2 id="score">18988</h2>
+        <h2 id="high-score">18988</h2>
     </div>
     <div id="lives">
         <h1 id="title"> ships will go here</h1>
     </div>
+    <div id="hi-scores">
+        <ol id="scores-list">
+            <h1 id="ts">asdfasdf</h1>
+            <h2 id="ts-2">test</h2>
+            <h3 id="ts-3">test</h3>
+        </ol>
+    </div>
 
-
-
-    <!-- Background -->
-    <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- <script type="text/javascript">
-        $(function() {
-            let move = 0
-            setInterval(function() {
-                move += 1
-                $('canvas').css('background-position-y', move + 'px')
-            }, 10)
-        })
-    </script> -->
+    <!-- Images -->
 
     <!-- Good guy -->
     <img class="img" id="ship" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/ship.png">
@@ -49,18 +43,33 @@
     <img class="img" id="baddie2-b" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-B.png">
 
     <!-- Explosioin images -->
-    <img class="img" id="baddieDie-1" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-1.png">
-    <img class="img" id="baddieDie-2" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-2.png">
-    <img class="img" id="baddieDie-3" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-3.png">
-    <img class="img" id="baddieDie-4" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-4.png">
-    <img class="img" id="baddieDie-5" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-5.png">
+    <img class="img" id="boom-1" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-1.png">
+    <img class="img" id="boom-2" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-2.png">
+    <img class="img" id="boom-3" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-3.png">
+    <img class="img" id="boom-4" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-4.png">
+    <img class="img" id="boom-5" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-5.png">
 
     <!-- Projectiles -->
     <img class="img" id="badBullet" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/badMissile.png">
     <img class="img" id="goodBullet" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/goodMissile.png">
 
+    <!-- Background -->
+    <img class="img" id="space" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/background/space.png">
 
     <!-- scripts -->
+
+    <!-- loop backround image on the y axis -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- <script type="text/javascript">
+            $(function() {
+                let move = 0
+                setInterval(function() {
+                    move += 1
+                    $('canvas').css('background-position-y', move + 'px')
+                }, 10)
+            })
+        </script> -->
+
     <script src="src/components/bullet.js"></script>
     <script src="src/components/badbullets.js"></script>
     <script src="src/components/goodbullets.js"></script>
