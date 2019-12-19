@@ -30,13 +30,7 @@
     margin: 0cm;
 }
 
-#title {
-    font-family: arcadeClassic;
-    color: darkred;
-    margin: 0cm;
-}
-
-#ships {
+.title {
     font-family: arcadeClassic;
     color: darkred;
     margin: 0cm;

@@ -6,11 +6,22 @@ class ScoreAdapter {
     getScores() {
         return fetch(this.scoreUrl).then(res => res.json())
     }
-    async getHighestScore() {
+    async getTopScore() {
         try {
             let response = await fetch(this.scoreUrl)
             let data = await response.json()
-            return data.highscore[0].high_score
+            return data.topscore[0].high_score
+        } catch (error) {
+            "Error on Fetch."
+        }
+    }
+
+    async getTopTen() {
+        try {
+            let response = await fetch(this.scoreUrl)
+            let data = await response.json()
+            console.log(data.topten)
+                // return data.topten.topten
         } catch (error) {
             "Error on Fetch."
         }

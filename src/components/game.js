@@ -14,6 +14,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
         this.scoreObj = document.getElementById("score")
         this.hiScore = document.getElementById("high-score")
+        this.hiScoreTitle = document.getElementById("top-score")
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
         this.bullets = []
@@ -24,7 +25,10 @@ class Game {
         this.createShip()
         this.bindings()
         this.draw(this.ctx)
-
+        this.scoreAdapter.getTopScore().then(highestScore => {
+            this.hiScore.innerText = highestScore
+            this.hiScoreTitle.innerText = "high score"
+        })
     }
 
     bindings() {
@@ -84,14 +88,11 @@ class Game {
     }
 
     start() {
-        if (this.gamestate !== GAMESTATE.MENU && this.gamestate !== GAMESTATE.SHOT) {
-            return;
-        } else {
-            this.gamestate = GAMESTATE.RUNNING;
-            this.addGalaxians()
-            this.createGalaxians()
-            this.gameLoop()
-        }
+        this.gamestate = GAMESTATE.RUNNING;
+        this.addGalaxians()
+        this.createGalaxians()
+        this.gameLoop()
+
     }
 
     update(deltaTime) {
@@ -114,8 +115,13 @@ class Game {
                     b.markedForDeletion = true
                     this.lives -= 1
                     this.gamestate = GAMESTATE.SHOT
-                    for (let g of this.galaxians) {
-                        g.reset(this.gameWidth, this.gameHeight)
+                    if (this.gamestate === GAMESTATE.SHOT) {
+                        for (let g of this.galaxians) {
+                            g.markedForDeletion = true
+                        }
+                        for (let b of this.bullets) {
+                            b.markedForDeletion = true
+                        }
                     }
                     this.createShip()
                     new InputHandler(this.ship)
@@ -141,11 +147,13 @@ class Game {
         for (let p of this.galaxians) {
             p.update()
             p.draw(this.ctx)
-            if (p.location.y < 0) {
-                p.markedForDeletion = true
+            if (p.location.y < 0 - p.height) {
+                // p.markedForDeletion = true
+                p.reset(this.gameWidth, this.gameHeight)
             }
             if (p.location.y > 800 + p.height) {
-                p.markedForDeletion = true
+                // p.markedForDeletion = true
+                p.reset(this.gameWidth, this.gameHeight)
             }
         }
 
@@ -153,7 +161,7 @@ class Game {
             this.addGalaxians()
             this.createGalaxians()
         }
-        // console.log(this.galaxians[0].markedForDeletion)
+
         if (!this.ship.markedForDeletion) {
             this.ship.update(this.deltaTime);
             this.ship.draw(this.ctx)
@@ -224,9 +232,6 @@ class Game {
 
     gameLoop(timestamp) {
         this.scoreObj.innerText = this.score
-        this.scoreAdapter.getHighestScore().then(highestScore => {
-            this.hiScore.innerText = highestScore
-        })
         this.deltaTime = timestamp - this.lastTime
         this.lastTime = timestamp
         this.galaxians = this.galaxians.filter(p => !p.markedForDeletion)

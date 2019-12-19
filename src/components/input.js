@@ -15,16 +15,24 @@ class InputHandler {
                     }
                     break
                 case 27:
-                    game.togglePause()
-                    break
-                case 13:
-                    game.start()
-                    break
-                case 67:
-                    if (game.gamestate == GAMESTATE.SHOT) {
-                        game.toggleContinue()
+                    if (game && game.gamestate === GAMESTATE.RUNNING) {
+                        game.togglePause()
+                    } else {
+                        break
                     }
-                    break
+                case 13:
+                    if (game && game.gamestate === GAMESTATE.MENU) {
+                        game.start()
+                    } else {
+                        break
+                    }
+                case 67:
+                    if (game && game.gamestate === GAMESTATE.SHOT) {
+                        game.toggleContinue()
+                    } else {
+                        break
+                    }
+
             }
             document.addEventListener('keyup', (e) => {
                 switch (e.keyCode) {

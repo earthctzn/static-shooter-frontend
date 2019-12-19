@@ -14,6 +14,14 @@ class Galaxian {
         this.setAttackPattern()
     }
 
+    reset(gameWidth, gameHeight) {
+        let rand = Math.floor(Math.random() * 301) + -300
+        let rand2 = Math.floor(Math.random() * 400) + 300
+        this.location = {
+            x: gameWidth / 2 - this.width / 2 + rand,
+            y: gameHeight - this.height - rand2
+        }
+    }
 
     shoot() {
         this.fire({...this.location }, this)
