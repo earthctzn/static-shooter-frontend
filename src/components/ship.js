@@ -30,28 +30,7 @@ class Ship {
     stop() {
         this.speed = 0
     }
-    drawExp(ctx) {
-        setTimeout(() => {
-            ctx.drawImage(this.exp1, this.location.x, this.location.y, this.width, this.height)
-            setTimeout(() => {
-                ctx.drawImage(this.exp2, this.location.x, this.location.y, this.width, this.height)
-                setTimeout(() => {
-                    ctx.drawImage(this.exp3, this.location.x, this.location.y, this.width, this.height)
-                    setTimeout(() => {
-                        ctx.drawImage(this.exp4, this.location.x, this.location.y, this.width, this.height)
-                        setTimeout(() => {
-                            ctx.drawImage(this.exp5, this.location.x, this.location.y, this.width, this.height)
-                        }, 200)
 
-                    }, 200)
-
-                }, 200)
-
-            }, 200)
-
-        }, 200)
-
-    }
     draw(ctx) {
         // ctx.clearRect(0, 0, 800, 600)
         ctx.drawImage(this.img, this.location.x, this.location.y, this.width, this.height)

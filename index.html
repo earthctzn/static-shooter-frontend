@@ -18,10 +18,10 @@
     </div>
     <div id="record">
         <h1 id="title">high score</h1>
-        <h2 id="high-score">18988</h2>
+        <h2 id="high-score"></h2>
     </div>
     <div id="lives">
-        <h1 id="title"> ships will go here</h1>
+        <h1 id="ships"> ships will go here</h1>
     </div>
     <div id="hi-scores">
         <ol id="scores-list">
@@ -43,6 +43,7 @@
     <img class="img" id="baddie2-b" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddie2-B.png">
 
     <!-- Explosioin images -->
+    <img class="img" id="explosion" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/explosion.png">
     <img class="img" id="boom-1" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-1.png">
     <img class="img" id="boom-2" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-2.png">
     <img class="img" id="boom-3" width="40" height="40" src="/Users/Caleb/Development/code/static-shooter-frontend/resources/sprites/baddieDie-3.png">
@@ -60,7 +61,7 @@
 
     <!-- loop backround image on the y axis -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function() {
             let move = 0
             setInterval(function() {
@@ -68,7 +69,7 @@
                 $('canvas').css('background-position-y', move + 'px')
             }, 10)
         })
-    </script>
+    </script> -->
 
     <script src="src/components/bullet.js"></script>
     <script src="src/components/badbullets.js"></script>

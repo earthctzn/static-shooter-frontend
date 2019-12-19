@@ -3,7 +3,7 @@ const GAMESTATE = {
     RUNNING: 1,
     MENU: 2,
     GAMEOVER: 3,
-    NEWLVL: 4
+    SHOT: 4
 }
 
 class Game {
@@ -20,11 +20,10 @@ class Game {
         this.galaxians = []
         this.score = 0
         this.lives = 4
+        this.gamestate = GAMESTATE.MENU
         this.createShip()
         this.bindings()
-        this.addGalaxians()
-        this.createGalaxians()
-        this.gameLoop()
+        this.draw(this.ctx)
 
     }
 
@@ -32,7 +31,6 @@ class Game {
         this.listener = new InputHandler(this.ship, this)
         this.lastTime = 0
         this.deltaTime = 0
-        this.gameState = GAMESTATE.MENU
     }
 
     shipFire(location) {
@@ -56,7 +54,6 @@ class Game {
 
     }
     createGalaxians() {
-        //I need to be able to add a number of galaxians of all types with both images for each.
         for (let g of this.galaxians)
             g.draw(this.ctx)
     }
@@ -65,13 +62,14 @@ class Game {
         return this.ship.location
     }
     createShip() {
-        for (let i = 0; i < this.lives; i++) {
-            this.ship = new Ship(this.gameWidth, this.gameHeight)
-        }
-
+        // let lives = this.lives
+        // for (let i = 0; i < lives; i++) {
+        this.ship = new Ship(this.gameWidth, this.gameHeight)
+            // I have to render 3 of the lives into the lives div 
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
+
 
     checkCollision(obj1, obj2) {
         const bttmOfBul = obj1.location.y + obj1.size.y
@@ -84,17 +82,43 @@ class Game {
         if (obj1.location.x >= rightOfObj || obj1.location.x + obj1.size.x <= leftOfObj) return false
         return true
     }
+
+    start() {
+        if (this.gamestate !== GAMESTATE.MENU && this.gamestate !== GAMESTATE.SHOT) {
+            return;
+        } else {
+            this.gamestate = GAMESTATE.RUNNING;
+            this.addGalaxians()
+            this.createGalaxians()
+            this.gameLoop()
+        }
+    }
+
     update(deltaTime) {
+        if (this.lives === 0) this.gamestate = GAMESTATE.GAMEOVER;
+        if (
+            this.gamestate === GAMESTATE.PAUSED ||
+            this.gamestate === GAMESTATE.MENU ||
+            this.gamestate === GAMESTATE.GAMEOVER ||
+            this.gamestate === GAMESTATE.SHOT
+        )
+            return;
         //check for collisions with all bullet types
         for (let b of this.bullets) {
             b.update(this.deltaTime)
             b.draw(this.ctx)
             if (b.constructor.name === "BadBullet") {
                 //check for collision btwn bad bullets and friendly ship
-                if (this.checkCollision(b, this.ship)) {
+                if (this.checkCollision(b, this.ship) && !this.ship.markedForDeletion) {
                     this.ship.markedForDeletion = true
                     b.markedForDeletion = true
                     this.lives -= 1
+                    this.gamestate = GAMESTATE.SHOT
+                    for (let g of this.galaxians) {
+                        g.reset(this.gameWidth, this.gameHeight)
+                    }
+                    this.createShip()
+                    new InputHandler(this.ship)
                 }
 
             } else if (b.constructor.name == "GoodBullet") {
@@ -124,12 +148,7 @@ class Game {
                 p.markedForDeletion = true
             }
         }
-        // const newGalaxians = this.galaxians.filter(p => p.markedForDeletion == false)
-        // const lostGalaxians = this.galaxians.legth - newGalaxians.length
-        // this.galaxians = newGalaxians
-        // for (let i = 0; i < lostGalaxians; i++) {
-        //     this.createGalaxians()
-        // }
+
         if (this.galaxians.length === 0) {
             this.addGalaxians()
             this.createGalaxians()
@@ -139,7 +158,68 @@ class Game {
             this.ship.update(this.deltaTime);
             this.ship.draw(this.ctx)
         }
+    }
 
+    draw(ctx) {
+        if (this.gamestate === GAMESTATE.PAUSED) {
+            ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.fill();
+            ctx.font = "30px arcadeClassic";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText("Paused", this.gameWidth / 2, this.gameHeight / 2);
+        }
+
+        if (this.gamestate === GAMESTATE.MENU) {
+            ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            ctx.fillStyle = "rgba(0,0,0,1)";
+            ctx.fill();
+            ctx.font = "30px arcadeClassic";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText(
+                "press enter to start",
+                this.gameWidth / 2,
+                this.gameHeight / 2
+            );
+        }
+        if (this.gamestate === GAMESTATE.GAMEOVER) {
+            ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            ctx.fillStyle = "rgba(0,0,0,1)";
+            ctx.fill();
+            ctx.font = "30px arcadeClassic";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText("game over", this.gameWidth / 2, this.gameHeight / 2);
+        }
+        if (this.gamestate === GAMESTATE.SHOT) {
+            this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            this.ctx.fillStyle = "rgba(0,0,0,1)";
+            this.ctx.fill();
+            this.ctx.font = "30px arcadeClassic";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("You died press c to continue", this.gameWidth / 2, this.gameHeight / 2);
+        }
+
+
+
+    }
+    toggleContinue() {
+        if (this.gamestate == GAMESTATE.SHOT) {
+            this.gamestate = GAMESTATE.RUNNING
+        } else {
+            this.gamestate = GAMESTATE.SHOT
+        }
+    }
+
+    togglePause() {
+        if (this.gamestate == GAMESTATE.PAUSED) {
+            this.gamestate = GAMESTATE.RUNNING
+        } else {
+            this.gamestate = GAMESTATE.PAUSED;
+        }
     }
 
     gameLoop(timestamp) {
@@ -153,6 +233,7 @@ class Game {
         this.bullets = this.bullets.filter(obj => !obj.markedForDeletion)
         this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
         this.update(this.deltaTime)
+        this.draw(this.ctx)
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 }

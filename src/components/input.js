@@ -1,9 +1,7 @@
 class InputHandler {
     constructor(ship, game) {
-        if (ship === null) {
-            return
-        }
         document.addEventListener('keydown', (e) => {
+            console.log(e.keyCode)
             switch (e.keyCode) {
                 case 37:
                     ship.moveLeft()
@@ -12,7 +10,20 @@ class InputHandler {
                     ship.moveRight()
                     break
                 case 32:
-                    ship.fire({...ship.location })
+                    if (!ship.markedForDeletion) {
+                        ship.fire({...ship.location })
+                    }
+                    break
+                case 27:
+                    game.togglePause()
+                    break
+                case 13:
+                    game.start()
+                    break
+                case 67:
+                    if (game.gamestate == GAMESTATE.SHOT) {
+                        game.toggleContinue()
+                    }
                     break
             }
             document.addEventListener('keyup', (e) => {

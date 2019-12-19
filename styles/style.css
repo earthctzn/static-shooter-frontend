@@ -36,6 +36,12 @@
     margin: 0cm;
 }
 
+#ships {
+    font-family: arcadeClassic;
+    color: darkred;
+    margin: 0cm;
+}
+
 #score-board {
     display: table-cell;
     vertical-align: top;
