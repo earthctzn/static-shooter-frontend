@@ -15,6 +15,7 @@ class Game {
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
         this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
+        this.coinSound = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
         this.bullets = []
         this.galaxians = []
         this.gamestate = GAMESTATE.MENU
@@ -26,9 +27,10 @@ class Game {
 
 
     bindings() {
-        this.startSound = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
-        this.shipSfx = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
+
+        this.shipShoot = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
         this.music = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
+        this.kill = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
         this.listener = new InputHandler(this.ship, this)
         this.scoreObj = document.getElementById("score")
         this.hiScore = document.getElementById("high-score")
@@ -44,13 +46,14 @@ class Game {
         })
     }
     start() {
-        this.music.play()
+
         this.lives = 4
         this.score = 0
         this.gamestate = GAMESTATE.RUNNING;
         this.addGalaxians()
         this.createGalaxians()
         this.gameLoop()
+        this.music.play()
     }
 
     saveData() {
@@ -64,9 +67,9 @@ class Game {
     }
 
     shipFire(location) {
-
         const goodBullet = new GoodBullet(location)
         this.bullets.push(goodBullet)
+        this.shipShoot.play()
     }
     enemyFire(location, galaxian) {
         if (!galaxian.markedForDeletion) {
@@ -105,6 +108,7 @@ class Game {
         const rightOfObj = obj2.location.x + obj2.width
         if (bttmOfBul <= topOfObj || topOfBul >= bottomOfObject) return false
         if (obj1.location.x >= rightOfObj || obj1.location.x + obj1.size.x <= leftOfObj) return false
+        this.kill.play()
         return true
     }
 
@@ -127,6 +131,7 @@ class Game {
                 //check for collision btwn bad bullets and friendly ship
                 if (this.checkCollision(b, this.ship) && !this.ship.markedForDeletion) {
                     this.ship.markedForDeletion = true
+
                     b.markedForDeletion = true
                     this.lives -= 1
                     this.livesManager.decrementLives()
@@ -151,9 +156,11 @@ class Game {
                         b.markedForDeletion = true
                         if (g.constructor.name == "Galaxian1") {
                             this.score += 100
+                            this.kill.play()
                         }
                         if (g.constructor.name == "Galaxian2") {
                             this.score += 300
+                            this.kill.play()
                         }
                     }
                 }

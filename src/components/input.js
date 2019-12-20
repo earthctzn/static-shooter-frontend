@@ -11,7 +11,6 @@ class InputHandler {
                 case 32:
                     if (!ship.markedForDeletion) {
                         ship.fire({...ship.location })
-                        ship.shipSfx.play()
                     }
                     break
                 case 27:
@@ -22,8 +21,9 @@ class InputHandler {
                     }
                 case 13:
                     if (game && (game.gamestate === GAMESTATE.MENU ||
-                            game.gamestate === GAMESTATE.GAMEOVER)) {
-                        console.log(game)
+                            game.gamestate === GAMESTATE.GAMEOVER
+                        )) {
+                        game.coinSound.play()
                         game.start()
                     } else {
                         break
