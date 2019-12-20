@@ -1,6 +1,6 @@
 class Ship {
 
-    constructor(gameWidth, gameHeight) {
+    constructor(gameWidth, gameHeight, location = false) {
         this.img = document.getElementById('ship')
         this.exp1 = document.getElementById("boom-1")
         this.exp2 = document.getElementById("boom-2")
@@ -14,9 +14,13 @@ class Ship {
         this.maxSpeed = 6
         this.speed = 0
         this.markedForDeletion = false
-        this.location = {
-            x: gameWidth / 2 - this.width / 2,
-            y: gameHeight - this.height - 60
+        if (!location) {
+            this.location = {
+                x: gameWidth / 2 - this.width / 2,
+                y: gameHeight - this.height - 60
+            }
+        } else {
+            this.location = location
         }
     }
     moveLeft() {

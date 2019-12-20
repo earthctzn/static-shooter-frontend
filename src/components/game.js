@@ -14,6 +14,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
+        this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
         this.bullets = []
         this.galaxians = []
         this.score = 0
@@ -40,9 +41,20 @@ class Game {
             this.hiScoreTitle.innerText = "high score"
         })
     }
+    start() {
+        this.gamestate = GAMESTATE.RUNNING;
+        console.log(this.gamestate)
+        this.addGalaxians()
+        console.log(this)
+        this.createGalaxians()
+        console.log(this.gamestate)
+        this.update(this.deltaTime)
+        this.gameLoop()
+
+    }
 
     saveData(e) {
-        // e.preventDefault()
+        e.preventDefault()
         const playerName = this.playerFormBody.value
         this.gameAdapter.createGame(this.score, playerName)
         this.gamestate = GAMESTATE.MENU
@@ -78,10 +90,7 @@ class Game {
         return this.ship.location
     }
     createShip() {
-        // let lives = this.lives
-        // for (let i = 0; i < lives; i++) {
         this.ship = new Ship(this.gameWidth, this.gameHeight)
-            // I have to render 3 of the lives into the lives div 
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
@@ -99,13 +108,7 @@ class Game {
         return true
     }
 
-    start() {
-        this.gamestate = GAMESTATE.RUNNING;
-        this.addGalaxians()
-        this.createGalaxians()
-        this.gameLoop()
 
-    }
 
     update(deltaTime) {
         if (this.lives === 0) this.gamestate = GAMESTATE.GAMEOVER;
@@ -126,6 +129,7 @@ class Game {
                     this.ship.markedForDeletion = true
                     b.markedForDeletion = true
                     this.lives -= 1
+                    this.livesManager.decrementLives()
                     this.gamestate = GAMESTATE.SHOT
                     if (this.gamestate === GAMESTATE.SHOT) {
                         for (let g of this.galaxians) {
@@ -191,6 +195,8 @@ class Game {
             ctx.fillText("Paused", this.gameWidth / 2, this.gameHeight / 2);
         }
 
+        this.livesManager.draw()
+
         if (this.gamestate === GAMESTATE.MENU) {
             ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             ctx.fillStyle = "rgba(0,0,0,1)";
@@ -211,7 +217,7 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("game over", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.fillText("game over. Press enter to play again!", this.gameWidth / 2, this.gameHeight / 2);
         }
         if (this.gamestate === GAMESTATE.SHOT) {
             this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);

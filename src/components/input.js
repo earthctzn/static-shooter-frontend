@@ -20,7 +20,9 @@ class InputHandler {
                         break
                     }
                 case 13:
-                    if (game && game.gamestate === GAMESTATE.MENU) {
+                    if (game && (game.gamestate === GAMESTATE.MENU ||
+                            game.gamestate === GAMESTATE.GAMEOVER)) {
+                        console.log(game)
                         game.start()
                     } else {
                         break
