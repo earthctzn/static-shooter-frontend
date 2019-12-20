@@ -12,13 +12,12 @@ class GameAdapter {
             score: score,
             player_name: playerName
         }
-        return fetch(this.baseUrl, {
+        return fetch(this.gameUrl, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
                 },
-                score: JSON.stringify({ game }),
-                player_name: JSON.stringify({ game })
+                body: JSON.stringify(game)
             })
             .then(res => res.json())
     }

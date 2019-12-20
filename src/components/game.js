@@ -8,7 +8,7 @@ const GAMESTATE = {
 
 class Game {
     constructor() {
-        // this.adapter = new GameAdapter()
+        this.gameAdapter = new GameAdapter()
         this.scoreAdapter = new ScoreAdapter()
         this.canvas = document.getElementById('gameSpace');
         this.ctx = this.canvas.getContext('2d')
