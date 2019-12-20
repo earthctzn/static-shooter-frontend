@@ -2,10 +2,6 @@ class ScoreAdapter {
     constructor() {
         this.scoreUrl = 'http://localhost:3000/api/v1/scores'
     }
-
-    getScores() {
-        return fetch(this.scoreUrl).then(res => res.json())
-    }
     async getTopScore() {
         try {
             let response = await fetch(`${this.scoreUrl}/top`)
@@ -17,12 +13,11 @@ class ScoreAdapter {
     }
 
 
-    async getTopTen() {
+    async getTopFive() {
         try {
-            let response = await fetch(this.scoreUrl)
+            let response = await fetch(`${this.scoreUrl}/topfive`)
             let data = await response.json()
-            console.log(data.topten)
-                // return data.topten.topten
+            return data.topfive
         } catch (error) {
             "Error on Fetch."
         }

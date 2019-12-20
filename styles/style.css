@@ -36,20 +36,14 @@
     z-index: 0;
 } */
 
-
-/* #player-form {
-    font-family: arcadeClassic;
+#player-form {
     position: absolute;
-    color: darkred;
-    width: 150px;
-    height: 20px;
     text-align: center;
-    font-size: x-large;
-    background: rgba(35, 170, 129, 0);
     border: none;
     left: 315px;
     top: 420px;
-} */
+    display: none;
+}
 
 #score {
     font-family: arcadeClassic;

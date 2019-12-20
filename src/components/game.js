@@ -4,7 +4,6 @@ const GAMESTATE = {
     MENU: 2,
     GAMEOVER: 3,
     SHOT: 4,
-    HISCORE: 5
 }
 
 class Game {
@@ -45,7 +44,6 @@ class Game {
     saveData(e) {
         e.preventDefault()
         const playerName = this.playerFormBody.value
-        this.scoreAdapter.createScore(playerName)
         this.gameAdapter.createGame(this.score, playerName)
     }
 
@@ -222,14 +220,15 @@ class Game {
             this.ctx.textAlign = "center";
             this.ctx.fillText("You died press c to continue", this.gameWidth / 2, this.gameHeight / 2);
         }
-        if (this.gamestate === GAMESTATE.GAMEOVER && this.gamestate === GAMESTATE.HISCORE) {
+        if (this.gamestate === GAMESTATE.GAMEOVER && this.score.toString() > this.hiScore.innerText) {
             this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             this.ctx.fillStyle = "rgba(0,0,0,1)";
             this.ctx.fill();
             this.ctx.font = "30px arcadeClassic";
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
-            this.ctx.fillText("Congratulations, you set a new High Score! Enter your name below", this.gameWidth / 2, this.gameHeight / 2);
+            this.playerForm.style.display = 'inline';
+            this.ctx.fillText("Congratulations, you set a new High Score!", this.gameWidth / 2, this.gameHeight / 2);
         }
 
 
