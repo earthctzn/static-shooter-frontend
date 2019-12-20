@@ -42,9 +42,11 @@ class Game {
     }
 
     saveData(e) {
-        e.preventDefault()
+        // e.preventDefault()
         const playerName = this.playerFormBody.value
         this.gameAdapter.createGame(this.score, playerName)
+        this.gamestate = GAMESTATE.MENU
+        this.update(this.deltaTime)
     }
 
     shipFire(location) {
