@@ -16,7 +16,40 @@
 
 .wrapper {
     position: relative;
+    /* width: 800px;
+    height: 800px; */
 }
+
+
+/* #player-name {
+    font-family: arcadeClassic;
+    position: absolute;
+    color: darkred;
+    width: 150px;
+    height: 20px;
+    text-align: center;
+    font-size: x-large;
+    background: rgba(35, 170, 129, 0);
+    border: none;
+    left: 315px;
+    top: 420px;
+    z-index: 0;
+} */
+
+
+/* #player-form {
+    font-family: arcadeClassic;
+    position: absolute;
+    color: darkred;
+    width: 150px;
+    height: 20px;
+    text-align: center;
+    font-size: x-large;
+    background: rgba(35, 170, 129, 0);
+    border: none;
+    left: 315px;
+    top: 420px;
+} */
 
 #score {
     font-family: arcadeClassic;
@@ -69,7 +102,7 @@
     background: rgba(35, 170, 129, 0);
     position: absolute;
     z-index: 1;
-    bottom: -800px;
+    bottom: -780px;
     font-family: arcadeClassic;
 }
 

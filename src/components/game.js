@@ -3,7 +3,8 @@ const GAMESTATE = {
     RUNNING: 1,
     MENU: 2,
     GAMEOVER: 3,
-    SHOT: 4
+    SHOT: 4,
+    HISCORE: 5
 }
 
 class Game {
@@ -12,9 +13,6 @@ class Game {
         this.scoreAdapter = new ScoreAdapter()
         this.canvas = document.getElementById('gameSpace');
         this.ctx = this.canvas.getContext('2d')
-        this.scoreObj = document.getElementById("score")
-        this.hiScore = document.getElementById("high-score")
-        this.hiScoreTitle = document.getElementById("top-score")
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
         this.bullets = []
@@ -25,16 +23,30 @@ class Game {
         this.createShip()
         this.bindings()
         this.draw(this.ctx)
+
+    }
+
+    bindings() {
+        this.listener = new InputHandler(this.ship, this)
+        this.scoreObj = document.getElementById("score")
+        this.hiScore = document.getElementById("high-score")
+        this.hiScoreTitle = document.getElementById("top-score")
+        this.playerForm = document.getElementById('player-form')
+        this.playerFormBody = document.getElementById('player-name')
+        this.playerForm.addEventListener('submit', this.saveData.bind(this))
+        this.lastTime = 0
+        this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
             this.hiScore.innerText = highestScore
             this.hiScoreTitle.innerText = "high score"
         })
     }
 
-    bindings() {
-        this.listener = new InputHandler(this.ship, this)
-        this.lastTime = 0
-        this.deltaTime = 0
+    saveData(e) {
+        e.preventDefault()
+        const playerName = this.playerFormBody.value
+        this.scoreAdapter.createScore(playerName)
+        this.gameAdapter.createGame(this.score, playerName)
     }
 
     shipFire(location) {
@@ -209,6 +221,15 @@ class Game {
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
             this.ctx.fillText("You died press c to continue", this.gameWidth / 2, this.gameHeight / 2);
+        }
+        if (this.gamestate === GAMESTATE.GAMEOVER && this.gamestate === GAMESTATE.HISCORE) {
+            this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            this.ctx.fillStyle = "rgba(0,0,0,1)";
+            this.ctx.fill();
+            this.ctx.font = "30px arcadeClassic";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("Congratulations, you set a new High Score! Enter your name below", this.gameWidth / 2, this.gameHeight / 2);
         }
 
 
