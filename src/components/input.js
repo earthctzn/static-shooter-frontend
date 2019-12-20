@@ -11,6 +11,7 @@ class InputHandler {
                 case 32:
                     if (!ship.markedForDeletion) {
                         ship.fire({...ship.location })
+                        ship.shipSfx.play()
                     }
                     break
                 case 27:

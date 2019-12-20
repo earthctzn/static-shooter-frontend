@@ -17,8 +17,6 @@ class Game {
         this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
         this.bullets = []
         this.galaxians = []
-        this.score = 0
-        this.lives = 4
         this.gamestate = GAMESTATE.MENU
         this.createShip()
         this.bindings()
@@ -26,7 +24,11 @@ class Game {
 
     }
 
+
     bindings() {
+        this.startSound = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
+        this.shipSfx = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
+        this.music = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
         this.listener = new InputHandler(this.ship, this)
         this.scoreObj = document.getElementById("score")
         this.hiScore = document.getElementById("high-score")
@@ -42,26 +44,27 @@ class Game {
         })
     }
     start() {
+        this.music.play()
+        this.lives = 4
+        this.score = 0
         this.gamestate = GAMESTATE.RUNNING;
-        console.log(this.gamestate)
         this.addGalaxians()
-        console.log(this)
         this.createGalaxians()
-        console.log(this.gamestate)
-        this.update(this.deltaTime)
         this.gameLoop()
-
     }
 
-    saveData(e) {
-        e.preventDefault()
+    saveData() {
         const playerName = this.playerFormBody.value
         this.gameAdapter.createGame(this.score, playerName)
+        this.music.play()
+        this.lives = 4
+        this.score = 0
         this.gamestate = GAMESTATE.MENU
         this.update(this.deltaTime)
     }
 
     shipFire(location) {
+
         const goodBullet = new GoodBullet(location)
         this.bullets.push(goodBullet)
     }
@@ -70,7 +73,6 @@ class Game {
             const badBullet = new BadBullet(location)
             this.bullets.push(badBullet)
         }
-
     }
     addGalaxians() {
         let count = 6
@@ -94,8 +96,6 @@ class Game {
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
-
-
     checkCollision(obj1, obj2) {
         const bttmOfBul = obj1.location.y + obj1.size.y
         const topOfBul = obj1.location.y
@@ -164,11 +164,9 @@ class Game {
             p.update()
             p.draw(this.ctx)
             if (p.location.y < 0 - p.height) {
-                // p.markedForDeletion = true
                 p.reset(this.gameWidth, this.gameHeight)
             }
             if (p.location.y > 800 + p.height) {
-                // p.markedForDeletion = true
                 p.reset(this.gameWidth, this.gameHeight)
             }
         }
