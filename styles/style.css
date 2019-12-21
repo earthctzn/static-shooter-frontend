@@ -21,7 +21,7 @@
 }
 
 
-/* #player-name {
+/* input [type=text] {
     font-family: arcadeClassic;
     position: absolute;
     color: darkred;
@@ -33,7 +33,7 @@
     border: none;
     left: 315px;
     top: 420px;
-    z-index: 0;
+
 } */
 
 #player-form {
@@ -68,7 +68,7 @@
     vertical-align: top;
     text-align: center;
     position: absolute;
-    height: 50px;
+    height: 55px;
     width: 100px;
     background: rgba(35, 170, 129, 0);
     left: 80px;
@@ -79,12 +79,12 @@
     display: table-cell;
     vertical-align: top;
     text-align: center;
-    height: 50px;
-    width: 400px;
+    height: 55px;
+    width: 180px;
     background: rgba(35, 170, 129, 0);
     position: absolute;
     z-index: 1;
-    left: 420px;
+    left: 525px;
 }
 
 #lives {

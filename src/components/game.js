@@ -58,7 +58,6 @@ class Game {
     saveData() {
         const playerName = this.playerFormBody.value
         this.gameAdapter.createGame(this.score, playerName)
-        this.introMusic.play()
         this.lives = 4
         this.score = 0
         this.gamestate = GAMESTATE.MENU
