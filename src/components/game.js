@@ -29,7 +29,7 @@ class Game {
     bindings() {
 
         this.shipShoot = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
-        this.music = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
+        this.introMusic = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
         this.kill = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
         this.listener = new InputHandler(this.ship, this)
         this.scoreObj = document.getElementById("score")
@@ -46,20 +46,19 @@ class Game {
         })
     }
     start() {
-
         this.lives = 4
         this.score = 0
         this.gamestate = GAMESTATE.RUNNING;
         this.addGalaxians()
         this.createGalaxians()
         this.gameLoop()
-        this.music.play()
+        this.introMusic.play()
     }
 
     saveData() {
         const playerName = this.playerFormBody.value
         this.gameAdapter.createGame(this.score, playerName)
-        this.music.play()
+        this.introMusic.play()
         this.lives = 4
         this.score = 0
         this.gamestate = GAMESTATE.MENU
