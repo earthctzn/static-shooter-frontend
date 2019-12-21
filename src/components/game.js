@@ -207,11 +207,7 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText(
-                "press enter to start",
-                this.gameWidth / 2,
-                this.gameHeight / 2
-            );
+            ctx.fillText("press enter to start", this.gameWidth / 2, this.gameHeight / 2);
         }
         if (this.gamestate === GAMESTATE.GAMEOVER) {
             ctx.rect(0, 0, this.gameWidth, this.gameHeight);

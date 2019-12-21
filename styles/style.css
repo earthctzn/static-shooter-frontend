@@ -15,9 +15,9 @@
 }
 
 .wrapper {
+    /* padding-left: 5em;
+    padding-right: 5em; */
     position: relative;
-    /* width: 800px;
-    height: 800px; */
 }
 
 
@@ -111,8 +111,3 @@
     z-index: 1;
     display: none;
 }
-
-
-/* #baddie1-a {
-    transform: rotate(90deg);
-} */
