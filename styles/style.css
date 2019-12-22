@@ -15,31 +15,13 @@
 }
 
 .wrapper {
-    /* padding-left: 5em;
-    padding-right: 5em; */
     position: relative;
 }
 
-
-/* input [type=text] {
+#player-form {
     font-family: arcadeClassic;
     position: absolute;
-    color: darkred;
-    width: 150px;
-    height: 20px;
     text-align: center;
-    font-size: x-large;
-    background: rgba(35, 170, 129, 0);
-    border: none;
-    left: 315px;
-    top: 420px;
-
-} */
-
-#player-form {
-    position: absolute;
-    text-align: center;
-    border: none;
     left: 315px;
     top: 420px;
     display: none;
