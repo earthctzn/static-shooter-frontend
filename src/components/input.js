@@ -1,5 +1,5 @@
 class InputHandler {
-    constructor(ship, game, form) {
+    constructor(ship, game) {
         document.addEventListener('keydown', (e) => {
             switch (e.keyCode) {
                 case 37:

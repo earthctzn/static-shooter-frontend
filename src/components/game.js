@@ -16,6 +16,7 @@ class Game {
         this.gameHeight = this.canvas.height;
         this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
         this.coinSound = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
+        this.score = 0
         this.bullets = []
         this.galaxians = []
         this.gamestate = GAMESTATE.MENU
@@ -27,12 +28,16 @@ class Game {
 
 
     bindings() {
-
         this.shipShoot = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
         this.introMusic = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
         this.kill = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
         this.listener = new InputHandler(this.ship, this)
+        this.scoreTitle = document.getElementById('score-title')
+        this.scoreTitle.innerText = '1up'
         this.scoreObj = document.getElementById("score")
+        this.scoreObj.innerText = this.score
+        this.scoresDiv = document.getElementById('scores')
+        this.scoresList = document.getElementById('scores-list')
         this.hiScore = document.getElementById("high-score")
         this.hiScoreTitle = document.getElementById("top-score")
         this.playerForm = document.getElementById('player-form')
@@ -47,7 +52,6 @@ class Game {
     }
     start() {
         this.lives = 4
-        this.score = 0
         this.gamestate = GAMESTATE.RUNNING;
         this.addGalaxians()
         this.createGalaxians()
@@ -208,7 +212,18 @@ class Game {
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText("press enter to start", this.gameWidth / 2, this.gameHeight / 2);
+            this.scoreAdapter.getTopFive().then(topFive => {
+                for (let scoreObj of topFive) {
+                    let li = document.createElement('li')
+                    li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
+                    this.scoresList.appendChild(li)
+                    this.scoresDiv.style.display = "block"
+                }
+            })
+        } else {
+            this.scoresDiv.style.display = 'none'
         }
+
         if (this.gamestate === GAMESTATE.GAMEOVER) {
             ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             ctx.fillStyle = "rgba(0,0,0,1)";
@@ -218,6 +233,7 @@ class Game {
             ctx.textAlign = "center";
             ctx.fillText("game over. Press enter to play again!", this.gameWidth / 2, this.gameHeight / 2);
         }
+
         if (this.gamestate === GAMESTATE.SHOT) {
             this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             this.ctx.fillStyle = "rgba(0,0,0,1)";
@@ -227,6 +243,7 @@ class Game {
             this.ctx.textAlign = "center";
             this.ctx.fillText("You died press c to continue", this.gameWidth / 2, this.gameHeight / 2);
         }
+
         if (this.gamestate === GAMESTATE.GAMEOVER && this.score.toString() > this.hiScore.innerText) {
             this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             this.ctx.fillStyle = "rgba(0,0,0,1)";
@@ -237,9 +254,6 @@ class Game {
             this.playerForm.style.display = 'inline';
             this.ctx.fillText("Congratulations, you set a new High Score!", this.gameWidth / 2, this.gameHeight / 2);
         }
-
-
-
     }
     toggleContinue() {
         if (this.gamestate == GAMESTATE.SHOT) {

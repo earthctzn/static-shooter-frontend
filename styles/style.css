@@ -100,13 +100,14 @@
     font-family: arcadeClassic;
 }
 
-#hi-scores {
+#scores {
     font-family: arcadeClassic;
+    font-size: x-large;
     background: rgba(35, 170, 129, 0);
-    bottom: -400px;
-    left: 290px;
+    top: 400px;
+    left: 280px;
     color: darkred;
-    width: 250px;
+    width: 350px;
     position: absolute;
     z-index: 1;
     display: none;
