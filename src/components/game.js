@@ -23,9 +23,7 @@ class Game {
         this.createShip()
         this.bindings()
         this.draw(this.ctx)
-
     }
-
 
     bindings() {
         this.shipShoot = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
@@ -50,6 +48,7 @@ class Game {
             this.hiScoreTitle.innerText = "high score"
         })
     }
+
     start() {
         this.lives = 4
         this.gamestate = GAMESTATE.RUNNING;
@@ -73,12 +72,14 @@ class Game {
         this.bullets.push(goodBullet)
         this.shipShoot.play()
     }
+
     enemyFire(location, galaxian) {
         if (!galaxian.markedForDeletion) {
             const badBullet = new BadBullet(location)
             this.bullets.push(badBullet)
         }
     }
+
     addGalaxians() {
         let count = 6
         for (let i = 0; i < count; i++) {
@@ -86,8 +87,8 @@ class Game {
             const galaxian2 = new Galaxian2(this.gameWidth, this.gameHeight, this.locateShip.bind(this), this.enemyFire.bind(this))
             this.galaxians.push(galaxian1, galaxian2)
         }
-
     }
+
     createGalaxians() {
         for (let g of this.galaxians)
             g.draw(this.ctx)
@@ -96,11 +97,13 @@ class Game {
     locateShip() {
         return this.ship.location
     }
+
     createShip() {
         this.ship = new Ship(this.gameWidth, this.gameHeight)
         this.ship.fire = this.shipFire.bind(this)
         this.ship.draw(this.ctx);
     }
+
     checkCollision(obj1, obj2) {
         const bttmOfBul = obj1.location.y + obj1.size.y
         const topOfBul = obj1.location.y
@@ -113,8 +116,6 @@ class Game {
         this.kill.play()
         return true
     }
-
-
 
     update(deltaTime) {
         if (this.lives === 0) this.gamestate = GAMESTATE.GAMEOVER;
@@ -133,7 +134,6 @@ class Game {
                 //check for collision btwn bad bullets and friendly ship
                 if (this.checkCollision(b, this.ship) && !this.ship.markedForDeletion) {
                     this.ship.markedForDeletion = true
-
                     b.markedForDeletion = true
                     this.lives -= 1
                     this.livesManager.decrementLives()
@@ -149,7 +149,6 @@ class Game {
                     this.createShip()
                     new InputHandler(this.ship)
                 }
-
             } else if (b.constructor.name == "GoodBullet") {
                 //check for collision btwn good bullets and enemy ships
                 for (let g of this.galaxians) {
