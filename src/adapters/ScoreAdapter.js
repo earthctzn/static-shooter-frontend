@@ -12,7 +12,6 @@ class ScoreAdapter {
         }
     }
 
-
     async getTopFive() {
         try {
             let response = await fetch(`${this.scoreUrl}/topfive`)
