@@ -1,6 +1,6 @@
 class GameAdapter {
     constructor() {
-        this.gameUrl = 'http://localhost:3000/api/v1/games'
+        this.gameUrl = 'http://statick-shooter-backend.herokuapp.com/api/v1/games'
     }
 
     async getGames() {
