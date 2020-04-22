@@ -15,7 +15,7 @@ class Game {
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
         this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
-        this.coinSound = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
+        this.coinSound = new Sfx('/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
         this.score = 0
         this.bullets = []
         this.galaxians = []
@@ -26,9 +26,9 @@ class Game {
     }
 
     bindings() {
-        this.shipShoot = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
-        this.introMusic = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Theme_Song.mp3')
-        this.kill = new Sfx('/Users/Caleb/Development/code/static-shooter-frontend/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
+        this.shipShoot = new Sfx('/resources/sfx/Galaga_Firing_Sound_Effect.mp3')
+        this.introMusic = new Sfx('/resources/sfx/Galaga_Theme_Song.mp3')
+        this.kill = new Sfx('/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
         this.listener = new InputHandler(this.ship, this)
         this.scoreTitle = document.getElementById('score-title')
         this.scoreTitle.innerText = '1up'
