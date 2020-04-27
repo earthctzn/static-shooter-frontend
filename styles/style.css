@@ -16,7 +16,7 @@
 
 .wrapper {
     position: relative;
-    margin: 0 auto;
+    margin: auto auto;
 }
 
 #player-form {
