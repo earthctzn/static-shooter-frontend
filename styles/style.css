@@ -6,6 +6,7 @@
 #gameSpace {
     border: 1px solid black;
     position: absolute;
+    margin: auto;
     background-size: cover;
     background: url('/resources/background/space.png');
 }
@@ -16,7 +17,7 @@
 
 .wrapper {
     position: relative;
-    margin: auto auto;
+    margin-left: 20em;
 }
 
 #player-form {
