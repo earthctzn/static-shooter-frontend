@@ -1,6 +1,7 @@
 class Galaxian {
     constructor(gameWidth, gameHeight, locateShip, enemyFire) {
         this.gameWidth = gameWidth
+        this.gameHeight = gameHeight
         this.velocity = {
             x: 0,
             y: 0

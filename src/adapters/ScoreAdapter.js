@@ -1,6 +1,7 @@
 class ScoreAdapter {
     constructor() {
         this.scoreUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/scores'
+        // 'http://localhost:3000/api/v1/scores'
     }
     async getTopScore() {
         try {

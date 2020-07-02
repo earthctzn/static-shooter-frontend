@@ -210,7 +210,7 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("press enter to start", this.gameWidth / 2, this.gameHeight / 2 - 80);
+            ctx.fillText("PRESS ENTER TO START", this.gameWidth / 2, this.gameHeight / 2 - 80);
             this.scoreAdapter.getTopFive().then(topFive => {
                 for (let scoreObj of topFive) {
                     let li = document.createElement('li')
@@ -230,7 +230,8 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("game over. Press enter to play again!", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.fillText("GAME OVER", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.fillText("PRESS  'ENTER'  TO  PLAY  AGAIN!", this.gameWidth / 2 + 5, this.gameHeight / 2 + 55);
         }
 
         if (this.gamestate === GAMESTATE.SHOT) {
@@ -240,7 +241,7 @@ class Game {
             this.ctx.font = "30px arcadeClassic";
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
-            this.ctx.fillText("You died press c to continue", this.gameWidth / 2, this.gameHeight / 2);
+            this.ctx.fillText("YOU  DIED  PRESS  'C'  TO  CONTINUE", this.gameWidth / 2, this.gameHeight / 2);
         }
 
         if (this.gamestate === GAMESTATE.GAMEOVER && this.score.toString() > this.hiScore.innerText) {
@@ -251,7 +252,7 @@ class Game {
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
             this.playerForm.style.display = 'inline';
-            this.ctx.fillText("Congratulations, you set a new High Score!", this.gameWidth / 2, this.gameHeight / 2);
+            this.ctx.fillText("CONGRATULATIONS  YOU  SET  A  NEW  HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2);
         }
     }
     toggleContinue() {
