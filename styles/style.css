@@ -9,7 +9,7 @@
     border: 1px solid black;
     position: absolute;
     background-size: cover;
-    background: url('/Users/Caleb/Development/code/projects/shooter/static-shooter-frontend/resources/background/space.png');
+    background: url('/resources/background/space.jpg');
 }
 
 .img {
