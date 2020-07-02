@@ -210,7 +210,7 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("PRESS ENTER TO START", this.gameWidth / 2, this.gameHeight / 2 - 80);
+            ctx.fillText("PRESS  ENTER  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
             this.scoreAdapter.getTopFive().then(topFive => {
                 for (let scoreObj of topFive) {
                     let li = document.createElement('li')
