@@ -4,9 +4,9 @@ class LivesManager {
         this._lives = lives
         this.ctx = ctx
         this.ships = [
-            new Ship(800, 800, { x: 5, y: 700 }),
-            new Ship(800, 800, { x: 55, y: 700 }),
-            new Ship(800, 800, { x: 105, y: 700 })
+            new Ship(800, 800, { x: 5, y: 760 }),
+            new Ship(800, 800, { x: 55, y: 760 }),
+            new Ship(800, 800, { x: 105, y: 760 })
         ]
         this.draw()
     }
