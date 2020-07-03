@@ -14,7 +14,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
         this.gameWidth = this.canvas.width;
         this.gameHeight = this.canvas.height;
-        this.livesManager = new LivesManager(document.querySelector('#ships'), this.ctx)
+        this.livesManager = new LivesManager(document.querySelector("#ships"), this.ctx)
         this.coinSound = new Sfx('/resources/sfx/Galaga_Coin_Sound_Effect.mp3')
         this.score = 0
         this.bullets = []
@@ -31,7 +31,7 @@ class Game {
         this.kill = new Sfx('/resources/sfx/Galaga_Kill_Enemy_Sound_Effect.mp3')
         this.listener = new InputHandler(this.ship, this)
         this.scoreTitle = document.getElementById('score-title')
-        this.scoreTitle.innerText = '1up'
+        this.scoreTitle.innerText = '1UP'
         this.scoreObj = document.getElementById("score")
         this.scoreObj.innerText = this.score
         this.scoresDiv = document.getElementById('scores')
@@ -45,7 +45,7 @@ class Game {
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
             this.hiScore.innerText = highestScore
-            this.hiScoreTitle.innerText = "high score"
+            this.hiScoreTitle.innerText = "HIGH SCORE"
         })
     }
 
