@@ -45,7 +45,7 @@ class Game {
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
             this.hiScore.innerText = highestScore
-            this.hiScoreTitle.innerText = "HIGH SCORE"
+            this.hiScoreTitle.innerText = "HIGH  SCORE"
         })
     }
 
