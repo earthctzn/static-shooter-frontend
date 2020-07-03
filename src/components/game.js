@@ -210,7 +210,7 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("PRESS  ENTER  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
+            ctx.fillText("PRESS  'ENTER'  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
             this.scoreAdapter.getTopFive().then(topFive => {
                 for (let scoreObj of topFive) {
                     let li = document.createElement('li')
@@ -252,7 +252,7 @@ class Game {
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
             this.playerForm.style.display = 'inline';
-            this.ctx.fillText("CONGRATULATIONS  YOU  SET  A  NEW  HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2);
+            this.ctx.fillText("CONGRATS  YOU  SET  A  NEW  HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2);
         }
     }
     toggleContinue() {
