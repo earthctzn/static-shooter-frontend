@@ -167,14 +167,19 @@ class Game {
                 }
             }
         }
+        //Check if any bullet is off the top or bottom of the screen
+        for (let bullet of this.bullets) {
+            bullet.update()
+            bullet.draw(this.ctx)
+            if (bullet.location.y < 0 - bullet.height || bullet.location.y > 800 + bullet.height) {
+                bullet.markedForDeletion = true
+            }
+        }
         //Check if any galaxian type is off the top or bottom of the screen
         for (let p of this.galaxians) {
             p.update()
             p.draw(this.ctx)
-            if (p.location.y < 0 - p.height) {
-                p.reset(this.gameWidth, this.gameHeight)
-            }
-            if (p.location.y > 800 + p.height) {
+            if (p.location.y < 0 - p.height || p.location.y > 800 + p.height) {
                 p.reset(this.gameWidth, this.gameHeight)
             }
         }
