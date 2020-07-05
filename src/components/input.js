@@ -14,7 +14,9 @@ class InputHandler {
                     }
                     break
                 case 27:
-                    if (game && game.gamestate === GAMESTATE.RUNNING) {
+                    if (game && (game.gamestate === GAMESTATE.RUNNING ||
+                            game.gamestate === GAMESTATE.PAUSED
+                        )) {
                         game.togglePause()
                     } else {
                         break

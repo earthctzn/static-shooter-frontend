@@ -63,6 +63,7 @@ class Game {
         this.gameAdapter.createGame(this.score, playerName)
         this.lives = 4
         this.score = 0
+        this.listscores()
         this.gamestate = GAMESTATE.MENU
         this.update(this.deltaTime)
     }
@@ -195,6 +196,17 @@ class Game {
         }
     }
 
+    listscores(){
+        this.scoreAdapter.getTopFive().then(topFive => {
+            for (let scoreObj of topFive) {
+                let li = document.createElement('li')
+                li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
+                this.scoresList.appendChild(li)
+                this.scoresDiv.style.display = "block"
+            }
+        })
+    }
+
     draw(ctx) {
         if (this.gamestate === GAMESTATE.PAUSED) {
             ctx.rect(0, 0, this.gameWidth, this.gameHeight);
@@ -216,14 +228,7 @@ class Game {
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText("PRESS  'ENTER'  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
-            this.scoreAdapter.getTopFive().then(topFive => {
-                for (let scoreObj of topFive) {
-                    let li = document.createElement('li')
-                    li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
-                    this.scoresList.appendChild(li)
-                    this.scoresDiv.style.display = "block"
-                }
-            })
+            this.listscores()
         } else {
             this.scoresDiv.style.display = 'none'
         }
