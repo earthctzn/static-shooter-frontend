@@ -10,7 +10,7 @@ class Ship {
         if (!location) {
             this.location = {
                 x: gameWidth / 2 - this.width / 2,
-                y: gameHeight - this.height - 60
+                y: gameHeight - this.height - 40
             }
         } else {
             this.location = location
