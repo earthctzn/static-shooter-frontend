@@ -24,8 +24,8 @@
     position: relative;
 }
 .inner-wrapper{
-    height: 750px;
-    width: 900px;
+    height: 900px;
+    width: 800px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -88,8 +88,8 @@
 }
 
 .inner-wrapper2{
-    height: 750px;
-    width: 900px;
+    height: 900px;
+    width: 800px;
     display: grid;
     grid-template-columns: 33.3% 33.3% 33.3%;
     grid-template-rows: 45% 55%;

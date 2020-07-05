@@ -171,7 +171,7 @@ class Game {
         for (let bullet of this.bullets) {
             bullet.update()
             bullet.draw(this.ctx)
-            if (bullet.location.y < 0 - bullet.height || bullet.location.y > 800 + bullet.height) {
+            if (bullet.location.y < 0 - bullet.height || bullet.location.y > 900 + bullet.height) {
                 bullet.markedForDeletion = true
             }
         }
@@ -179,7 +179,7 @@ class Game {
         for (let p of this.galaxians) {
             p.update()
             p.draw(this.ctx)
-            if (p.location.y < 0 - p.height || p.location.y > 800 + p.height) {
+            if (p.location.y < 0 - p.height || p.location.y > 900 + p.height) {
                 p.reset(this.gameWidth, this.gameHeight)
             }
         }
