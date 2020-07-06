@@ -19,7 +19,6 @@ class ScoreAdapter {
         try {
             let response = await fetch(`${this.scoreUrl}/topfive`)
             let data = await response.json()
-            console.log(data)
             return data
         } catch (error) {
             "Error on Fetch."
