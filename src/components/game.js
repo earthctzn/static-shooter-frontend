@@ -36,16 +36,18 @@ class Game {
         this.scoreObj.innerText = this.score
         this.scoresDiv = document.getElementById('scores')
         this.scoresList = document.getElementById('scores-list')
+        this.scoresListTitle = document.getElementById('top-scores')
+        this.scoresListTitle.innerText = "LEADER BOARD"
         this.hiScore = document.getElementById("high-score")
         this.hiScoreTitle = document.getElementById("top-score")
+        this.hiScoreTitle.innerText = "HIGH  SCORE"
         this.playerForm = document.getElementById('player-form')
         this.playerFormBody = document.getElementById('player-name')
         this.playerForm.addEventListener('submit', this.saveData.bind(this))
         this.lastTime = 0
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
-            this.hiScore.innerText = highestScore
-            this.hiScoreTitle.innerText = "HIGH  SCORE"
+            this.hiScore.innerText = highestScore || "LOADING..."
         })
     }
 
@@ -198,9 +200,16 @@ class Game {
 
     listscores(){
         this.scoreAdapter.getTopFive().then(topFive => {
-            for (let scoreObj of topFive) {
+            if(topFive != undefined){
+                for (let scoreObj of topFive) {
+                    let li = document.createElement('li')
+                    li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
+                    this.scoresList.appendChild(li)
+                    this.scoresDiv.style.display = "block"
+                }
+            }else{
                 let li = document.createElement('li')
-                li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
+                li.innerText = "LOADING..."
                 this.scoresList.appendChild(li)
                 this.scoresDiv.style.display = "block"
             }
