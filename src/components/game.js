@@ -5,6 +5,7 @@ const GAMESTATE = {
     GAMEOVER: 3,
     SHOT: 4,
 }
+// /Users/Caleb/Development/code/projects/shooter/static-shooter-frontend
 
 class Game {
     constructor() {
@@ -19,6 +20,7 @@ class Game {
         this.score = 0
         this.bullets = []
         this.galaxians = []
+        this.topScores = []
         this.gamestate = GAMESTATE.MENU
         this.createShip()
         this.bindings()
@@ -65,7 +67,7 @@ class Game {
         this.gameAdapter.createGame(this.score, playerName)
         this.lives = 4
         this.score = 0
-        this.listscores()
+        this.listScores()
         this.gamestate = GAMESTATE.MENU
         this.update(this.deltaTime)
     }
@@ -198,10 +200,11 @@ class Game {
         }
     }
 
-    listscores(){
+    listScores(){
         this.scoreAdapter.getTopFive().then(topFive => {
             if(topFive != undefined){
                 for (let scoreObj of topFive) {
+                    this.topScores.push(scoreObj.score)
                     let li = document.createElement('li')
                     li.innerText = `${scoreObj.player.name} - ${scoreObj.score}`
                     this.scoresList.appendChild(li)
@@ -212,6 +215,17 @@ class Game {
                 li.innerText = "LOADING..."
                 this.scoresList.appendChild(li)
                 this.scoresDiv.style.display = "block"
+            }
+        })
+    }
+    compareScores(){
+        this.scoreAdapter.getTopFive().then(topFive => {
+            for (let scoreObj of topFive){
+                if(this.score.toString() > scoreObj.score){
+                    return true
+                }else{
+                    return false
+                }
             }
         })
     }
@@ -237,7 +251,7 @@ class Game {
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText("PRESS  'ENTER'  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
-            this.listscores()
+            this.listScores()
         } else {
             this.scoresDiv.style.display = 'none'
         }
@@ -273,7 +287,19 @@ class Game {
             this.playerForm.style.display = 'inline';
             this.ctx.fillText("CONGRATS  YOU  SET  A  NEW  HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2);
         }
+        
+        if (this.gamestate === GAMESTATE.GAMEOVER && this.topScores[4] ){ 
+            this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            this.ctx.fillStyle = "rgba(0,0,0,1)";
+            this.ctx.fill();
+            this.ctx.font = "30px arcadeClassic";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.playerForm.style.display = 'inline';
+            this.ctx.fillText("CONGRATS  YOU  MADE IT TO THE LEADER BOARD!", this.gameWidth / 2, this.gameHeight / 2);
+        }
     }
+
     toggleContinue() {
         if (this.gamestate == GAMESTATE.SHOT) {
             this.gamestate = GAMESTATE.RUNNING
