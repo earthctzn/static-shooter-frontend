@@ -1,6 +1,7 @@
 class GameAdapter {
     constructor() {
         this.gameUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/games'
+        // 'https://static-shooter-backend.herokuapp.com/api/v1/games'
 
         // 'http://localhost:3000/api/v1/games'
     }

@@ -43,13 +43,13 @@
                 <ul class="help">
                     <li>Press the 'LEFT' and 'RIGHT' arrow keys to move the ship.</li>
                     <li>Press the 'SPACEBAR' to fire.</li>
-                    <li>Press 'ESC' to pause the game.</li>  
+                    <li>Press 'ESC' to pause the game.</li>
                 </ul>
             </div>
         </div>
 
 
-        
+
 
         <!-- Images -->
         <!-- /Users/Caleb/Development/code/projects/shooter/static-shooter-frontend -->
@@ -75,7 +75,7 @@
         <img class="img" id="goodBullet" width="40" height="40" src="/resources/sprites/goodMissile.png">
 
         <!-- Background -->
-        <img class="img" id="space" src="/resources/background/space.jpg">
+        <img class="img" id="space" src="/resources/background/NewSpace.png">
 
         <!-- scripts -->
 
@@ -87,7 +87,7 @@
                 setInterval(function() {
                     move += 1
                     $('canvas').css('background-position-y', move + 'px')
-                }, 10)
+                }, 15)
             })
         </script>
         <script src="src/components/sounds.js"></script>

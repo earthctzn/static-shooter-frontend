@@ -1,6 +1,7 @@
 class ScoreAdapter {
     constructor() {
         this.scoreUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/scores'
+        // 'https://static-shooter-backend.herokuapp.com/api/v1/scores'
         // 
         // 'http://localhost:3000/api/v1/scores'
     }
@@ -18,6 +19,7 @@ class ScoreAdapter {
         try {
             let response = await fetch(`${this.scoreUrl}/topfive`)
             let data = await response.json()
+            console.log(data)
             return data
         } catch (error) {
             "Error on Fetch."
