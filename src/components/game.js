@@ -55,6 +55,7 @@ class Game {
 
     start() {
         this.lives = 4
+        this.score = 0
         this.gamestate = GAMESTATE.RUNNING;
         this.addGalaxians()
         this.createGalaxians()
