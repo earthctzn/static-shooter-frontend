@@ -288,7 +288,7 @@ class Game {
             this.ctx.fillText("CONGRATS  YOU  SET  A  NEW  HIGH SCORE!", this.gameWidth / 2, this.gameHeight / 2);
         }
         
-        if (this.gamestate === GAMESTATE.GAMEOVER && this.topScores[4] ){ 
+        if (this.gamestate === GAMESTATE.GAMEOVER && this.score.toString() > this.topScores[this.topScores.length - 1] ){ 
             this.ctx.rect(0, 0, this.gameWidth, this.gameHeight);
             this.ctx.fillStyle = "rgba(0,0,0,1)";
             this.ctx.fill();
