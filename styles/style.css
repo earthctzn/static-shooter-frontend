@@ -1,6 +1,6 @@
 @font-face {
     font-family: arcadeClassic;
-    src: url('/resources/fonts/arcadaclassic.ttf');
+    src: url('/Users/Caleb/Development/code/projects/shooter/static-shooter-frontend/resources/fonts/arcadaclassic.ttf');
 }
 
 /* /Users/Caleb/Development/code/projects/shooter/static-shooter-frontend  */
@@ -10,7 +10,7 @@
     border: 1px solid black;
     position: absolute;
     background-size: cover;
-    background: url('/resources/background/NewSpace.png');
+    background: url('/Users/Caleb/Development/code/projects/shooter/static-shooter-frontend/resources/background/NewSpace.png');
 }
 
 .img {
@@ -144,4 +144,20 @@ input{
     position: relative;
     z-index: 1;
     display: none;
+}
+#footer{
+    width: 800px;
+    height: 20px;
+    text-align: center;
+}
+p{
+    width: inherit;
+    margin: 5px;
+}
+a{
+    color: darkred;
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(32, 165, 72);
 }

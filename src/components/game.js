@@ -251,7 +251,10 @@ class Game {
             ctx.font = "30px arcadeClassic";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("PRESS  'ENTER'  TO  START", this.gameWidth / 2, this.gameHeight / 2 - 80);
+            ctx.fillText("USE 'LEFT'  AND  'RIGHT'  ARROWS  TO  MOVE", this.gameWidth / 2, this.gameHeight / 2 - 80);
+            ctx.fillText("PRESS  THE  'SPACEBAR'  TO  FIRE", this.gameWidth / 2, this.gameHeight / 2 - 60);
+            ctx.fillText("PRESS   'ESC'   TO   PAUSE  GAME", this.gameWidth / 2, this.gameHeight / 2 - 40);
+            ctx.fillText("PRESS   'ENTER'   TO   START", this.gameWidth / 2, this.gameHeight / 2 - 20);
             this.listScores()
         } else {
             this.scoresDiv.style.display = 'none'
