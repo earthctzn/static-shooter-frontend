@@ -3,7 +3,7 @@
     src: url('/resources/fonts/arcadaclassic.ttf');
 }
 
-/* /Users/Caleb/Development/code/projects/shooter/static-shooter-frontend  */
+/* /Users/Caleb/Development/projects/shooter/static-shooter-frontend  */
 
 #gameSpace {
     font-family: arcadeClassic;
@@ -160,4 +160,5 @@ a{
 }
 a:hover{
     color: rgb(32, 165, 72);
+    cursor: pointer;
 }

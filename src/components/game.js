@@ -111,13 +111,13 @@ class Game {
     }
 
     checkCollision(obj1, obj2) {
-        const bttmOfBul = obj1.location.y + obj1.size.y
-        const topOfBul = obj1.location.y
-        const topOfObj = obj2.location.y
+        const bttmOfBullet = obj1.location.y + obj1.size.y
+        const topOfBulllet = obj1.location.y
+        const topOfObject = obj2.location.y
         const bottomOfObject = obj2.location.y + obj2.height
         const leftOfObj = obj2.location.x
         const rightOfObj = obj2.location.x + obj2.width
-        if (bttmOfBul <= topOfObj || topOfBul >= bottomOfObject) return false
+        if (bttmOfBullet <= topOfObject || topOfBulllet >= bottomOfObject) return false
         if (obj1.location.x >= rightOfObj || obj1.location.x + obj1.size.x <= leftOfObj) return false
         this.kill.play()
         return true
