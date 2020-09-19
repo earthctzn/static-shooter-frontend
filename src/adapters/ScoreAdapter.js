@@ -1,20 +1,22 @@
 class ScoreAdapter {
     constructor() {
-        this.scoreUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/scores' 
+        this.scoreUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/scores'
         // 'https://static-shooter-backend.herokuapp.com/api/v1/scores' 
         // 'http://localhost:3000/api/v1/scores'
-        this.loading = false
+
+        this.loadingMessage = document.getElementById('loading')
+        this.scoresDiv = document.getElementById('scores')
+        this.loadingLi = document.getElementById('loading-li')
     }
     async getTopScore() {
         try {
-            this.loading = true
+            this.loadingMessage.style.display = 'block'
             let response = await fetch(`${this.scoreUrl}/top`)
             let data = await response.json()
             if(data.score != undefined){
-                this.loading = false
+                this.loadingMessage.style.display = 'none'
                 return data.score 
             }
-            
         } catch (error) {
             "Error on Fetch."
         }
@@ -22,11 +24,12 @@ class ScoreAdapter {
 
     async getTopFive() {
         try {
-            this.loading = true
+            this.scoresDiv.style.display = 'block'
+            this.loadingLi.style.display = 'block'
             let response = await fetch(`${this.scoreUrl}/topfive`)
             let data = await response.json()
             if(data != undefined){
-                this.loading = false
+                this.loadingLi.style.display = 'none'
                 return data 
             }
         } catch (error) {

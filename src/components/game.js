@@ -38,8 +38,6 @@ class Game {
         this.scoreObj.innerText = this.score
         this.scoresDiv = document.getElementById('scores')
         this.scoresList = document.getElementById('scores-list')
-        this.loadingMessage = document.getElementById('loading')
-        this.loadingLi = document.getElementById('loading-li')
         this.scoresListTitle = document.getElementById('top-scores')
         this.scoresListTitle.innerText = "LEADER BOARD"
         this.hiScore = document.getElementById("high-score")
@@ -209,7 +207,7 @@ class Game {
 
     listScores(){
        this.scoreAdapter.getTopFive().then(topFive => { 
-            if(this.scoreAdapter.loading != true){
+            if( topFive != undefined ){
                 for (let scoreObj of topFive) {
                     this.topScores.push(scoreObj.score)
                     let li = document.createElement('li')
@@ -217,15 +215,7 @@ class Game {
                     this.scoresList.appendChild(li)
                     this.scoresDiv.style.display = "block"
                 }
-            }else{
-                
-                // let li = document.getElementById('loading-li')
-                // // li.innerText = "LOADING..."
-                // this.scoresList.appendChild(li)
-                this.scoresDiv.style.display = "block" 
-                this.loadingLi.style.display = "block" 
-            }  
-
+            }
         })
     }
     compareScores(){
