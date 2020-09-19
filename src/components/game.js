@@ -38,6 +38,8 @@ class Game {
         this.scoreObj.innerText = this.score
         this.scoresDiv = document.getElementById('scores')
         this.scoresList = document.getElementById('scores-list')
+        this.loadingMessage = document.getElementById('loading')
+        this.loadingLi = document.getElementById('loading-li')
         this.scoresListTitle = document.getElementById('top-scores')
         this.scoresListTitle.innerText = "LEADER BOARD"
         this.hiScore = document.getElementById("high-score")
@@ -50,7 +52,7 @@ class Game {
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
             if(this.scoreAdapter.loading === true){
-                this.hiScore.innerText = "LOADING..."
+                this.loadingMessage.style.display = 'block'
             }else{
                 this.hiScore.innerText = highestScore  
             }
@@ -127,7 +129,7 @@ class Game {
         return true
     }
 
-    update(deltaTime) {
+    update() {
         if (this.lives === 0) this.gamestate = GAMESTATE.GAMEOVER;
         if (
             this.gamestate === GAMESTATE.PAUSED ||
@@ -216,10 +218,12 @@ class Game {
                     this.scoresDiv.style.display = "block"
                 }
             }else{
-                let li = document.createElement('li')
-                li.innerText = "LOADING..."
-                this.scoresList.appendChild(li)
-                this.scoresDiv.style.display = "block"  
+                
+                // let li = document.getElementById('loading-li')
+                // // li.innerText = "LOADING..."
+                // this.scoresList.appendChild(li)
+                this.scoresDiv.style.display = "block" 
+                this.loadingLi.style.display = "block" 
             }  
 
         })

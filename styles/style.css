@@ -116,6 +116,11 @@ input{
     text-align: center;
 }
 
+#loading, #loading-li{
+    font-family: arcadeClassic;
+    display: none; 
+    color: whitesmoke;
+}
 
 #player-form {
     grid-row: 2;
