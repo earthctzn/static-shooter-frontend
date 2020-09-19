@@ -8,6 +8,7 @@ class ScoreAdapter {
         this.scoresDiv = document.getElementById('scores')
         this.loadingLi = document.getElementById('loading-li')
     }
+    
     async getTopScore() {
         try {
             this.loadingMessage.style.display = 'block'
