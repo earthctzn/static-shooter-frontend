@@ -49,7 +49,11 @@ class Game {
         this.lastTime = 0
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
-            this.hiScore.innerText = highestScore || "LOADING..."
+            if(this.scoreAdapter.loading === true){
+                this.hiScore.innerText = "LOADING..."
+            }else{
+                this.hiScore.innerText = highestScore  
+            }
         })
     }
 
@@ -202,8 +206,8 @@ class Game {
     }
 
     listScores(){
-        this.scoreAdapter.getTopFive().then(topFive => {
-            if(topFive != undefined){
+       this.scoreAdapter.getTopFive().then(topFive => { 
+            if(this.scoreAdapter.loading != true){
                 for (let scoreObj of topFive) {
                     this.topScores.push(scoreObj.score)
                     let li = document.createElement('li')
@@ -215,8 +219,9 @@ class Game {
                 let li = document.createElement('li')
                 li.innerText = "LOADING..."
                 this.scoresList.appendChild(li)
-                this.scoresDiv.style.display = "block"
-            }
+                this.scoresDiv.style.display = "block"  
+            }  
+
         })
     }
     compareScores(){
