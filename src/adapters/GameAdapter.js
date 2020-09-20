@@ -1,14 +1,9 @@
 class GameAdapter {
     constructor() {
-        this.gameUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/games'
+        this.gameUrl = 'http://localhost:3000/api/v1/games'
         // 'https://static-shooter-backend.herokuapp.com/api/v1/games'
         // 'http://localhost:3000/api/v1/games'
     }
-
-    // async getGames() {
-    //     const res = await fetch(this.gameUrl)
-    //     return await res.json()
-    // }
 
     async createGame(score, playerName) {
         const game = {

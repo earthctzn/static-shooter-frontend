@@ -49,9 +49,7 @@ class Game {
         this.lastTime = 0
         this.deltaTime = 0
         this.scoreAdapter.getTopScore().then(highestScore => {
-            if(this.scoreAdapter.loading === true){
-                this.loadingMessage.style.display = 'block'
-            }else{
+            if(highestScore != undefined){
                 this.hiScore.innerText = highestScore  
             }
         })
