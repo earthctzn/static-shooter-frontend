@@ -1,6 +1,6 @@
 class ScoreAdapter {
     constructor() {
-        this.scoreUrl = 'http://localhost:3000/api/v1/scores'
+        this.scoreUrl = 'https://static-shooter-backend.herokuapp.com/api/v1/scores' 
         // 'https://static-shooter-backend.herokuapp.com/api/v1/scores' 
         // 'http://localhost:3000/api/v1/scores'
 
